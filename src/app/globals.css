@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0d0e14;
+  --color-card: #151720;
+  --color-card-border: #24283b;
+  --color-accent: #C8A96E;
+  --color-accent-dark: #b07a52;
+  --color-text: #e0e2eb;
+  --color-text-muted: #949ab8;
+  --color-error: #ef4444;
+  --color-success: #107C41;
+  --color-blue: #60a5fa;
+  --color-purple: #a78bfa;
+  --color-teal: #2dd4bf;
+  --color-pink: #f472b6;
+  --color-input: rgba(255, 255, 255, 0.04);
+  --color-input-border: rgba(255, 255, 255, 0.08);
+  --color-memo-bg: #ffffff;
+  --color-memo-text: #1a1a1a;
+  --color-memo-navy: #002060;
+  --color-memo-sky: #4472C4;
+  --color-memo-line: #333333;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-display: swap;
+  src: url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+}
+
+body {
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-card-border);
+  border-radius: 3px;
+}
+
+/* Animations */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(200, 169, 110, 0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Glass card */
+.glass-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-card-border);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+}
+
+/* Memo content styling (white paper look) */
+.memo-paper {
+  font-family: 'Libre Franklin', 'Calibri', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-memo-text);
+  background: var(--color-memo-bg);
+  padding: 48px 56px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  max-width: 850px;
+  margin: 0 auto;
+  min-height: 800px;
+}
+
+.memo-paper h1 {
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--color-memo-text);
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-memo-line);
+}
+
+.memo-paper h2 {
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-memo-text);
+  margin: 28px 0 16px 0;
+  padding-top: 8px;
+  border-top: 1.5px solid var(--color-memo-line);
+}
+
+.memo-paper h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-memo-navy);
+  margin: 16px 0 8px 0;
+}
+
+.memo-paper p {
+  margin-bottom: 12px;
+}
+
+.memo-paper strong {
+  font-weight: 700;
+  color: var(--color-memo-text);
+}
+
+.memo-paper ul {
+  margin: 8px 0 16px 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.memo-paper ul li {
+  position: relative;
+  margin-bottom: 6px;
+  padding-left: 14px;
+}
+
+.memo-paper ul li::before {
+  content: "\2022";
+  position: absolute;
+  left: -6px;
+  color: var(--color-memo-text);
+  font-size: 1.2em;
+  line-height: 1;
+  top: 1px;
+}
+
+.memo-paper table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 13px;
+}
+
+.memo-paper th {
+  background: var(--color-memo-navy);
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 12px;
+  text-align: right;
+  border: 1px solid #fff;
+}
+
+.memo-paper th:first-child {
+  text-align: left;
+}
+
+.memo-paper td {
+  padding: 6px 12px;
+  border-bottom: 1px solid #eee;
+  color: var(--color-memo-text);
+  text-align: right;
+}
+
+.memo-paper td:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+
+.memo-paper blockquote {
+  border-left: 3px solid var(--color-memo-navy);
+  margin: 16px 0;
+  padding: 4px 0 4px 16px;
+  font-style: italic;
+  color: #444;
+  background: #f9f9fc;
+}
+
+/* Citation pills */
+.cite-im {
+  color: #7c6fc4;
+  font-size: 10px;
+  font-weight: 500;
+  vertical-align: super;
+  cursor: default;
+  opacity: 0.75;
+}
+
+.cite-web {
+  color: #3b82f6;
+  font-size: 10px;
+  font-weight: 500;
+  vertical-align: super;
+  cursor: default;
+  opacity: 0.75;
+}
+
+.cite-model {
+  color: #db2777;
+  font-size: 10px;
+  font-weight: 500;
+  vertical-align: super;
+  cursor: default;
+  opacity: 0.75;
+}
