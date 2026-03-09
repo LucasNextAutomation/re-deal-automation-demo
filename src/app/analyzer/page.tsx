@@ -178,8 +178,8 @@ export default function AnalyzerPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-10 text-center"
           >
-            <span className="mb-4 inline-block rounded-full border border-[var(--color-accent)]/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[2px] text-[var(--color-accent)]">
-              NEXT &times; INVEST
+            <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/5 px-3 py-1 text-[10px] font-medium uppercase tracking-[2px] text-[var(--color-accent)]">
+              NextAutomation Deal Analyzer
             </span>
             <h1 className="mb-2 text-[28px] font-semibold tracking-tight text-white">
               Deal Analyzer

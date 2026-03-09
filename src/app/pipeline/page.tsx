@@ -74,8 +74,8 @@ export default function PipelinePage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-12 text-center"
           >
-            <span className="mb-4 inline-block rounded-full border border-[var(--color-accent)]/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[2px] text-[var(--color-accent)]">
-              SYSTEM ARCHITECTURE
+            <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/5 px-3 py-1 text-[10px] font-medium uppercase tracking-[2px] text-[var(--color-accent)]">
+              NextAutomation Pipeline
             </span>
             <h1 className="mb-3 text-3xl font-bold tracking-tight text-white">
               n8n Pipeline

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { Zap } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/analyzer", label: "Analyzer" },
@@ -20,12 +21,12 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-card-border)] bg-[var(--color-bg)]/80 backdrop-blur-xl"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-accent)]">
+            <Zap className="h-4 w-4 text-white" fill="currentColor" />
+          </div>
           <span className="text-lg font-semibold text-white tracking-tight">
-            NextAutomation
-          </span>
-          <span className="rounded-full border border-[var(--color-accent)]/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-widest text-[var(--color-accent)]">
-            Invest
+            Next<span className="text-[var(--color-accent)]">Automation</span>
           </span>
         </Link>
 
@@ -52,9 +53,14 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <span className="hidden text-[11px] text-[var(--color-text-muted)]/60 sm:block">
-            Powered by NextAutomation
-          </span>
+          <a
+            href="https://nextautomation.us"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden rounded-md bg-[var(--color-accent)]/10 px-3 py-1 text-[11px] font-medium text-[var(--color-accent)] transition-colors hover:bg-[var(--color-accent)]/20 sm:block"
+          >
+            nextautomation.us
+          </a>
         </div>
       </div>
     </motion.nav>

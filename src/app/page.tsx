@@ -75,9 +75,9 @@ export default function HomePage() {
             className="relative mx-auto max-w-4xl text-center"
           >
             <motion.div variants={itemVariants}>
-              <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/20 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[2px] text-[var(--color-accent)]">
+              <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/5 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[2px] text-[var(--color-accent)]">
                 <Sparkles className="h-3.5 w-3.5" />
-                NEXT &times; INVEST
+                NextAutomation &mdash; Deal Intelligence
               </span>
             </motion.div>
 
@@ -86,7 +86,7 @@ export default function HomePage() {
               className="mb-6 mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl"
             >
               AI Deal{" "}
-              <span className="bg-gradient-to-r from-[var(--color-accent)] to-[#e0c4a8] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--color-accent)] to-[#a5b4fc] bg-clip-text text-transparent">
                 Analyzer
               </span>
             </motion.h1>
