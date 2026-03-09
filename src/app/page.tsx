@@ -83,7 +83,7 @@ export default function HomePage() {
 
             <motion.h1
               variants={itemVariants}
-              className="mb-6 mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl"
+              className="mb-6 mt-6 text-4xl font-bold tracking-tight text-[var(--color-ink)] sm:text-6xl"
             >
               AI Deal{" "}
               <span className="bg-gradient-to-r from-[var(--color-accent)] to-[#60a5fa] bg-clip-text text-transparent">
@@ -148,7 +148,7 @@ export default function HomePage() {
                   <div className="mb-1 text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
                     Step {i + 1}
                   </div>
-                  <h3 className="mb-3 text-lg font-semibold text-white">
+                  <h3 className="mb-3 text-lg font-semibold text-[var(--color-ink)]">
                     {feature.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
@@ -169,7 +169,7 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-2xl text-center"
           >
-            <h2 className="mb-4 text-2xl font-semibold text-white">
+            <h2 className="mb-4 text-2xl font-semibold text-[var(--color-ink)]">
               From CIM to IC Memo
             </h2>
             <p className="mb-8 text-[var(--color-text-muted)]">

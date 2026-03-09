@@ -181,7 +181,7 @@ export default function AnalyzerPage() {
             <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/5 px-3 py-1 text-[10px] font-medium uppercase tracking-[2px] text-[var(--color-accent)]">
               NextAutomation Deal Analyzer
             </span>
-            <h1 className="mb-2 text-[28px] font-semibold tracking-tight text-white">
+            <h1 className="mb-2 text-[28px] font-semibold tracking-tight text-[var(--color-ink)]">
               Deal Analyzer
             </h1>
             <p className="text-sm text-[var(--color-text-muted)]">
@@ -214,7 +214,7 @@ export default function AnalyzerPage() {
                           onChange={(e) =>
                             updateField("dealName", e.target.value)
                           }
-                          className="w-full rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-white/15 focus:border-[var(--color-accent)]/40"
+                          className="w-full rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40"
                         />
                       </div>
                       <div>
@@ -228,7 +228,7 @@ export default function AnalyzerPage() {
                           onChange={(e) =>
                             updateField("location", e.target.value)
                           }
-                          className="w-full rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-white/15 focus:border-[var(--color-accent)]/40"
+                          className="w-full rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40"
                         />
                       </div>
                       <div>
@@ -250,7 +250,7 @@ export default function AnalyzerPage() {
                               <option
                                 key={type}
                                 value={type}
-                                className="bg-[#1a1a24]"
+                                className="bg-white"
                               >
                                 {type}
                               </option>
@@ -270,7 +270,7 @@ export default function AnalyzerPage() {
                           onChange={(e) =>
                             updateField("askingPrice", e.target.value)
                           }
-                          className="w-full rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-white/15 focus:border-[var(--color-accent)]/40"
+                          className="w-full rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40"
                         />
                       </div>
                     </div>
@@ -286,7 +286,7 @@ export default function AnalyzerPage() {
                         onChange={(e) =>
                           updateField("context", e.target.value)
                         }
-                        className="w-full resize-y rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-white/15 focus:border-[var(--color-accent)]/40"
+                        className="w-full resize-y rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40"
                       />
                     </div>
 
@@ -409,7 +409,7 @@ export default function AnalyzerPage() {
                   {/* Results Header */}
                   <div className="mb-6 flex flex-wrap items-start justify-between gap-4 border-b border-[var(--color-card-border)] pb-5">
                     <div>
-                      <h2 className="text-lg font-semibold text-white">
+                      <h2 className="text-lg font-semibold text-[var(--color-ink)]">
                         Investment Memo
                       </h2>
                       <p className="mt-1 text-[11px] text-[var(--color-text-muted)]">
@@ -449,7 +449,7 @@ export default function AnalyzerPage() {
                   </div>
 
                   {/* Source Legend */}
-                  <div className="mb-5 flex flex-wrap gap-4 rounded-lg border border-[var(--color-card-border)] bg-white/[0.02] px-4 py-2.5">
+                  <div className="mb-5 flex flex-wrap gap-4 rounded-lg border border-[var(--color-card-border)] bg-[var(--color-bg-muted)] px-4 py-2.5">
                     <div className="flex items-center gap-1.5 text-[11px] text-[var(--color-text-muted)]">
                       <span className="h-2 w-2 rounded-sm bg-[var(--color-purple)]" />
                       IM Page Ref
@@ -533,7 +533,7 @@ export default function AnalyzerPage() {
                             ].map((source, i) => (
                               <li
                                 key={i}
-                                className="flex items-center gap-3 rounded-lg border border-white/[0.04] bg-white/[0.02] px-3 py-2 text-[13px] transition-all hover:bg-white/[0.04]"
+                                className="flex items-center gap-3 rounded-lg border border-[var(--color-card-border)] bg-[var(--color-bg-muted)] px-3 py-2 text-[13px] transition-all hover:bg-[var(--color-bg-muted)]/80"
                               >
                                 <span
                                   className="flex-shrink-0 rounded px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"

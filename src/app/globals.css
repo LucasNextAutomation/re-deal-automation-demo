@@ -1,37 +1,35 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0b0f14;
-  --color-card: #0f1520;
-  --color-card-border: #1f2a37;
+  /* NextAutomation Brand — Light Premium Theme */
+  --color-bg: #ffffff;
+  --color-bg-muted: #f6f7f8;
+  --color-card: #ffffff;
+  --color-card-border: #e6e8eb;
   --color-accent: #0049B8;
   --color-accent-dark: #003d9e;
-  --color-text: #e0e2eb;
-  --color-text-muted: #949ab8;
+  --color-ink: #0f172a;
+  --color-ink-muted: #475569;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
   --color-error: #ef4444;
   --color-success: #107C41;
-  --color-blue: #60a5fa;
+  --color-blue: #0049B8;
   --color-purple: #a78bfa;
   --color-teal: #2dd4bf;
   --color-pink: #f472b6;
-  --color-input: rgba(255, 255, 255, 0.04);
-  --color-input-border: rgba(255, 255, 255, 0.08);
+  --color-input: #f6f7f8;
+  --color-input-border: #e6e8eb;
   --color-memo-bg: #ffffff;
   --color-memo-text: #1a1a1a;
   --color-memo-navy: #002060;
   --color-memo-sky: #4472C4;
   --color-memo-line: #333333;
-}
-
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-display: swap;
-  src: url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
 }
 
 body {
-  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   background: var(--color-bg);
   color: var(--color-text);
 }
@@ -73,17 +71,17 @@ body {
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(0, 73, 184, 0.08) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 73, 184, 0.04) 50%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 2s linear infinite;
 }
 
-/* Glass card */
+/* Glass card — light theme */
 .glass-card {
   background: var(--color-card);
   border: 1px solid var(--color-card-border);
-  border-radius: 16px;
-  backdrop-filter: blur(20px);
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
 }
 
 /* Memo content styling (white paper look) */
@@ -92,10 +90,11 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: var(--color-memo-text);
-  background: var(--color-memo-bg);
+  background: var(--color-bg-muted);
   padding: 48px 56px;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-  border-radius: 2px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--color-card-border);
+  border-radius: 12px;
   max-width: 850px;
   margin: 0 auto;
   min-height: 800px;
@@ -118,7 +117,7 @@ body {
   color: var(--color-memo-text);
   margin: 28px 0 16px 0;
   padding-top: 8px;
-  border-top: 1.5px solid var(--color-memo-line);
+  border-top: 1.5px solid #ddd;
 }
 
 .memo-paper h3 {
@@ -211,7 +210,7 @@ body {
 }
 
 .cite-web {
-  color: #3b82f6;
+  color: #0049B8;
   font-size: 10px;
   font-weight: 500;
   vertical-align: super;

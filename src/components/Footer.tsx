@@ -14,10 +14,10 @@ export default function Footer() {
               alt="NextAutomation"
               width={28}
               height={28}
-              className="rounded-md invert"
+              className="rounded-md"
             />
             <div>
-              <span className="text-sm font-semibold text-white">
+              <span className="text-sm font-semibold text-[var(--color-ink)]">
                 NextAutomation
               </span>
               <p className="text-[11px] text-[var(--color-text-muted)]/70">

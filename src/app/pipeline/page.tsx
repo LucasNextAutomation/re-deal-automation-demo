@@ -77,7 +77,7 @@ export default function PipelinePage() {
             <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/5 px-3 py-1 text-[10px] font-medium uppercase tracking-[2px] text-[var(--color-accent)]">
               NextAutomation Pipeline
             </span>
-            <h1 className="mb-3 text-3xl font-bold tracking-tight text-white">
+            <h1 className="mb-3 text-3xl font-bold tracking-tight text-[var(--color-ink)]">
               n8n Pipeline
             </h1>
             <p className="mx-auto max-w-lg text-sm text-[var(--color-text-muted)]">

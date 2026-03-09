@@ -27,9 +27,9 @@ export default function Navbar() {
             alt="NextAutomation"
             width={32}
             height={32}
-            className="rounded-lg invert"
+            className="rounded-lg"
           />
-          <span className="text-lg font-semibold text-white tracking-tight">
+          <span className="text-lg font-semibold text-[var(--color-ink)] tracking-tight">
             NextAutomation
           </span>
         </Link>
