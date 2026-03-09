@@ -17,6 +17,7 @@ import {
   Users,
   TrendingUp,
   Calendar,
+  Play,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -52,6 +53,7 @@ export default function AnalyzerPage() {
   const [showExtracted, setShowExtracted] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [dragOver, setDragOver] = useState(false);
+  const [isExample, setIsExample] = useState(false);
   const [steps, setSteps] = useState<StepState[]>(
     MOCK_PROCESSING_STEPS.map((s) => ({ ...s, status: "pending" as const }))
   );
@@ -145,6 +147,11 @@ export default function AnalyzerPage() {
     [startProcessing]
   );
 
+  const handleTryExample = useCallback(() => {
+    setIsExample(true);
+    startProcessing();
+  }, [startProcessing]);
+
   const resetAnalyzer = useCallback(() => {
     setSubmitted(false);
     setProcessing(false);
@@ -152,6 +159,7 @@ export default function AnalyzerPage() {
     setShowExtracted(false);
     setFile(null);
     setContext("");
+    setIsExample(false);
     setSteps(
       MOCK_PROCESSING_STEPS.map((s) => ({ ...s, status: "pending" as const }))
     );
@@ -201,7 +209,7 @@ export default function AnalyzerPage() {
               Deal Analyzer
             </h1>
             <p className="text-sm text-[var(--color-text-muted)]">
-              Upload a CIM — the AI extracts everything and generates an IC-grade memo
+              Upload a CIM — the AI extracts everything and generates an IC-grade memo with full underwriting analysis
             </p>
           </motion.header>
 
@@ -214,11 +222,11 @@ export default function AnalyzerPage() {
                 onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
                 onDragLeave={() => setDragOver(false)}
                 onDrop={handleDrop}
-                onClick={() => fileInputRef.current?.click()}
+                onClick={() => !isExample && fileInputRef.current?.click()}
                 className={`relative mb-5 cursor-pointer rounded-xl border-[1.5px] border-dashed p-10 text-center transition-all ${
                   dragOver
                     ? "border-[var(--color-accent)] bg-[var(--color-accent)]/[0.03]"
-                    : file
+                    : file || isExample
                       ? "border-[var(--color-accent)]/40 bg-[var(--color-accent)]/[0.02]"
                       : "border-[var(--color-input-border)] hover:border-[var(--color-accent)]/50"
                 }`}
@@ -230,7 +238,19 @@ export default function AnalyzerPage() {
                   onChange={(e) => handleFileChange(e.target.files)}
                   className="hidden"
                 />
-                {file ? (
+                {isExample ? (
+                  <>
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-accent)]/10">
+                      <Building2 className="h-6 w-6 text-[var(--color-accent)]" />
+                    </div>
+                    <p className="text-sm font-medium text-[var(--color-ink)]">
+                      Example: Meridian Tower — Investment Memorandum
+                    </p>
+                    <p className="mt-1 text-xs text-[var(--color-text-muted)]">
+                      10 pages — Class A Office, Midtown Manhattan
+                    </p>
+                  </>
+                ) : file ? (
                   <>
                     <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-accent)]/10">
                       <ScanSearch className="h-6 w-6 text-[var(--color-accent)]" />
@@ -280,6 +300,30 @@ export default function AnalyzerPage() {
                 Analyze CIM
               </button>
             </form>
+
+            {/* Try Example — outside the form */}
+            {!submitted && (
+              <>
+                <div className="mt-5 flex items-center gap-3">
+                  <div className="h-px flex-1 bg-[var(--color-card-border)]" />
+                  <span className="text-[11px] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
+                    or
+                  </span>
+                  <div className="h-px flex-1 bg-[var(--color-card-border)]" />
+                </div>
+                <button
+                  type="button"
+                  onClick={handleTryExample}
+                  className="mt-4 flex w-full items-center justify-center gap-2.5 rounded-xl border-[1.5px] border-[var(--color-accent)]/30 py-3.5 text-[15px] font-semibold text-[var(--color-accent)] transition-all hover:-translate-y-0.5 hover:border-[var(--color-accent)]/60 hover:bg-[var(--color-accent)]/[0.04] hover:shadow-lg hover:shadow-[var(--color-accent)]/10"
+                >
+                  <Play className="h-4 w-4" />
+                  Try with Example Deal
+                </button>
+                <p className="mt-2.5 text-center text-[11px] text-[var(--color-text-muted)]/60">
+                  See how it works with a sample commercial property — no upload needed
+                </p>
+              </>
+            )}
           </div>
 
           {/* ─── PROCESSING PIPELINE ─── */}
@@ -466,10 +510,10 @@ export default function AnalyzerPage() {
                           { type: "WEB", color: "var(--color-blue)", label: "CBRE Midtown Manhattan Office Q4 2025", detail: "cbre.com/research/manhattan" },
                           { type: "WEB", color: "var(--color-blue)", label: "JLL NYC Office Market Outlook 2026", detail: "jll.com/research/nyc-office" },
                           { type: "WEB", color: "var(--color-blue)", label: "Cushman & Wakefield Plaza District", detail: "cushmanwakefield.com/nyc" },
-                          { type: "WEB", color: "var(--color-blue)", label: "CoStar NYC Office Analytics", detail: "costar.com/analytics" },
-                          { type: "WEB", color: "var(--color-blue)", label: "NYC DOF Property Tax Records", detail: "nyc.gov/finance" },
                           { type: "WEB", color: "var(--color-blue)", label: "Real Capital Analytics Transactions", detail: "rcanalytics.com" },
-                          { type: "MODEL", color: "var(--color-pink)", label: "DCF / IRR Projections", detail: "7-year hold, 60% LTV, 5.25% fixed rate" },
+                          { type: "WEB", color: "var(--color-blue)", label: "NYC DOF Property Tax Records", detail: "nyc.gov/finance" },
+                          { type: "MODEL", color: "var(--color-pink)", label: "DSCR / LTV / Debt Yield Analysis", detail: "60% LTV, 5.25% fixed rate, 30-yr amortization" },
+                          { type: "MODEL", color: "var(--color-pink)", label: "DCF / IRR Projections", detail: "7-year hold, base/downside/upside scenarios" },
                         ].map((source, i) => (
                           <li
                             key={i}

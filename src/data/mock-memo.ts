@@ -3,31 +3,31 @@ export const MOCK_MEMO_SECTIONS = [
     id: "exec-summary",
     title: "Executive Summary",
     html: `
-      <p><strong>Carré Haussmann</strong> is a 4,850 sqm prime office asset located at 14 Boulevard Haussmann, Paris 9ème, offered at <strong>€45,000,000</strong> representing a going-in cap rate of 4.2%. <span class="cite-im">[p.3]</span></p>
-      <p>The asset is 94% leased to three investment-grade tenants with a WAULT of 5.8 years. The building underwent a comprehensive HQE-certified renovation in 2021, bringing it to current environmental standards. <span class="cite-im">[p.4]</span> <span class="cite-im">[p.12]</span></p>
-      <p>Our analysis identifies a <strong>16.2% IRR over a 7-year hold</strong> under the base case, driven by contractual rent escalation (indexation to ILAT), reversionary upside on below-market leases, and improving Paris CBD vacancy dynamics. <span class="cite-model">[modeled]</span></p>
-      <blockquote>Recommendation: <strong>Proceed to LOI</strong> — the asset offers strong risk-adjusted returns with limited downside given tenant quality and location.</blockquote>
+      <p><strong>Meridian Tower</strong> is a 186,400 SF Class A office and retail asset located at 350 Park Avenue, Midtown Manhattan, NY, offered at <strong>$142,000,000</strong> representing a going-in cap rate of 4.85%. <span class="cite-im">[p.3]</span></p>
+      <p>The property is 91.3% leased to a diversified mix of investment-grade and creditworthy tenants across 14 leases, anchored by Deloitte LLP (38% of NRA) and Morgan Stanley Wealth Management (22% of NRA). The WAULT stands at 6.4 years. <span class="cite-im">[p.4]</span> <span class="cite-im">[p.14]</span></p>
+      <p>Stabilized NOI of <strong>$6,887,000</strong> supports a Debt Service Coverage Ratio (DSCR) of <strong>1.42x</strong> and a debt yield of <strong>8.1%</strong> at 60% LTV. Our analysis identifies a <strong>14.8% levered IRR over a 7-year hold</strong> under the base case, driven by contractual rent escalation, reversionary upside on below-market leases, and improving Midtown East vacancy dynamics. <span class="cite-model">[modeled]</span></p>
+      <blockquote>Recommendation: <strong>Proceed to LOI</strong> — the asset offers strong risk-adjusted returns with solid debt coverage metrics and limited downside given tenant credit quality and location.</blockquote>
     `,
   },
   {
     id: "market-analysis",
     title: "Market Analysis",
     html: `
-      <h3>Paris CBD Office Market Overview</h3>
-      <p>The Paris CBD (Central Business District) office market remains one of Europe's most resilient, with prime rents reaching <strong>€930/sqm/year</strong> in Q4 2025, up 3.1% year-over-year. <span class="cite-web">[JLL Paris Q4 2025]</span></p>
-      <p>Overall CBD vacancy stands at <strong>2.8%</strong>, near historic lows, driven by constrained new supply and sustained demand from financial services and technology tenants. <span class="cite-web">[BNP RE Q4 2025]</span></p>
+      <h3>Midtown Manhattan Office Market Overview</h3>
+      <p>The Midtown Manhattan office market continues to recover, with Class A asking rents reaching <strong>$82.50/SF</strong> in Q4 2025, up 2.8% year-over-year. Overall Midtown vacancy has declined to <strong>12.4%</strong>, down from 14.1% a year ago, as return-to-office mandates and flight-to-quality trends strengthen demand for premium assets. <span class="cite-web">[CBRE Midtown Manhattan Q4 2025]</span></p>
+      <p>Net absorption in Midtown totaled <strong>4.2M SF</strong> in 2025, the strongest annual figure since 2019, driven primarily by financial services, legal, and technology sectors. <span class="cite-web">[JLL NYC Office Market Outlook 2026]</span></p>
 
       <table>
         <tr><th>Metric</th><th>2023</th><th>2024</th><th>2025</th></tr>
-        <tr><td>Prime Rent (€/sqm/yr)</td><td>€880</td><td>€905</td><td>€930</td></tr>
-        <tr><td>CBD Vacancy Rate</td><td>3.4%</td><td>3.0%</td><td>2.8%</td></tr>
-        <tr><td>Take-up (sqm, CBD)</td><td>485,000</td><td>512,000</td><td>538,000</td></tr>
-        <tr><td>Investment Volume (€bn)</td><td>€12.1</td><td>€14.3</td><td>€15.8</td></tr>
+        <tr><td>Class A Asking Rent ($/SF)</td><td>$78.20</td><td>$80.25</td><td>$82.50</td></tr>
+        <tr><td>Midtown Vacancy Rate</td><td>15.2%</td><td>14.1%</td><td>12.4%</td></tr>
+        <tr><td>Net Absorption (M SF)</td><td>1.8</td><td>3.1</td><td>4.2</td></tr>
+        <tr><td>Investment Sales Volume ($B)</td><td>$8.6</td><td>$11.2</td><td>$14.7</td></tr>
       </table>
 
-      <h3>Submarket: Paris 9ème</h3>
-      <p>The 9th arrondissement benefits from excellent transport connectivity (Métro lines 7, 8, 9, 12, 13 within 500m), proximity to Gare Saint-Lazare, and a growing cluster of tech and media companies. <span class="cite-im">[p.8]</span></p>
-      <p>Grade A vacancy in the 9th is <strong>1.9%</strong>, below the CBD average, reflecting the submarket's desirability. Recent transactions include 22 Rue de Mogador (€12,200/sqm) and 8 Rue de la Chaussée d'Antin (€13,100/sqm). <span class="cite-web">[Cushman & Wakefield]</span></p>
+      <h3>Submarket: Park Avenue Corridor (46th-57th St)</h3>
+      <p>The Park Avenue corridor between 46th and 57th Streets remains Manhattan's premier office submarket, home to major financial institutions, law firms, and consulting companies. Class A vacancy in this micro-market is <strong>8.7%</strong>, well below the broader Midtown average. <span class="cite-im">[p.8]</span></p>
+      <p>Recent comparable transactions include 375 Park Avenue ($1,050/SF, 4.2% cap), 280 Park Avenue ($925/SF, 4.6% cap), and 425 Park Avenue ($1,180/SF, 3.9% cap). The subject's basis of <strong>$762/SF</strong> represents a compelling entry relative to corridor comps. <span class="cite-web">[Real Capital Analytics]</span></p>
     `,
   },
   {
@@ -35,32 +35,77 @@ export const MOCK_MEMO_SECTIONS = [
     title: "Asset Assessment",
     html: `
       <h3>Property Description</h3>
-      <p>Carré Haussmann is a classic Haussmannian building spanning <strong>7 floors</strong> with a total GLA of <strong>4,850 sqm</strong>, including 4,560 sqm of office space and 290 sqm of ground-floor retail. The asset features a landscaped interior courtyard and 12 underground parking spaces. <span class="cite-im">[p.5]</span> <span class="cite-im">[p.6]</span></p>
+      <p>Meridian Tower is a <strong>32-story</strong> Class A office tower with ground-floor retail, totaling <strong>186,400 SF</strong> (170,200 SF office / 16,200 SF retail). Originally constructed in 1963, the property underwent a comprehensive $18M capital improvement program completed in 2023, including full lobby renovation, elevator modernization, MEP upgrades, and new curtain wall glazing. <span class="cite-im">[p.5]</span> <span class="cite-im">[p.6]</span></p>
 
       <table>
         <tr><th>Characteristic</th><th>Detail</th></tr>
-        <tr><td>Address</td><td>14 Boulevard Haussmann, 75009 Paris</td></tr>
-        <tr><td>Year Built / Renovated</td><td>1892 / 2021</td></tr>
-        <tr><td>Total GLA</td><td>4,850 sqm</td></tr>
-        <tr><td>Floors</td><td>B2 to R+6</td></tr>
-        <tr><td>Certification</td><td>HQE Excellent (2021)</td></tr>
-        <tr><td>Parking</td><td>12 spaces (underground)</td></tr>
-        <tr><td>EPC Rating</td><td>B</td></tr>
+        <tr><td>Address</td><td>350 Park Avenue, New York, NY 10022</td></tr>
+        <tr><td>Year Built / Renovated</td><td>1963 / 2023</td></tr>
+        <tr><td>Total GLA</td><td>186,400 SF (Office: 170,200 / Retail: 16,200)</td></tr>
+        <tr><td>Floors</td><td>32 above grade, 2 below</td></tr>
+        <tr><td>Zoning</td><td>C5-3 (as-of-right commercial)</td></tr>
+        <tr><td>ENERGY STAR Score</td><td>82 / 100</td></tr>
+        <tr><td>Parking</td><td>None (3 garage facilities within 1 block)</td></tr>
+        <tr><td>Tax Lot</td><td>Block 1305, Lot 6</td></tr>
       </table>
 
       <h3>Tenant Schedule</h3>
-      <p>The asset is <strong>94% occupied</strong> by three corporate tenants. All leases are 3/6/9 commercial leases indexed to ILAT. <span class="cite-im">[p.14]</span></p>
+      <p>The property is <strong>91.3%</strong> occupied across 14 leases. Major tenants include two investment-grade anchors representing 60% of NRA. All leases contain annual escalations of 2.5-3.0%. <span class="cite-im">[p.14]</span></p>
 
       <table>
-        <tr><th>Tenant</th><th>Area (sqm)</th><th>Rent (€/sqm)</th><th>Expiry</th><th>Break</th></tr>
-        <tr><td>Société Générale CIB</td><td>2,400</td><td>€780</td><td>2031</td><td>2028</td></tr>
-        <tr><td>Capgemini Engineering</td><td>1,600</td><td>€820</td><td>2032</td><td>2029</td></tr>
-        <tr><td>Publicis Groupe</td><td>560</td><td>€850</td><td>2030</td><td>2027</td></tr>
-        <tr><td><em>Vacant</em></td><td>290</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><th>Tenant</th><th>SF</th><th>% NRA</th><th>Rent ($/SF)</th><th>Expiry</th><th>Credit</th></tr>
+        <tr><td>Deloitte LLP</td><td>70,832</td><td>38.0%</td><td>$76.00</td><td>2032</td><td>Inv. Grade</td></tr>
+        <tr><td>Morgan Stanley WM</td><td>41,008</td><td>22.0%</td><td>$82.00</td><td>2031</td><td>Inv. Grade</td></tr>
+        <tr><td>Kirkland & Ellis</td><td>18,640</td><td>10.0%</td><td>$85.00</td><td>2030</td><td>Strong</td></tr>
+        <tr><td>Citadel Securities</td><td>14,912</td><td>8.0%</td><td>$88.00</td><td>2033</td><td>Strong</td></tr>
+        <tr><td>Retail (3 tenants)</td><td>14,580</td><td>7.8%</td><td>$125.00</td><td>Various</td><td>Varies</td></tr>
+        <tr><td>Other Office (4)</td><td>10,228</td><td>5.5%</td><td>$74.00</td><td>2028-30</td><td>Moderate</td></tr>
+        <tr><td><em>Vacant</em></td><td>16,200</td><td>8.7%</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
       </table>
 
       <h3>Condition & CapEx</h3>
-      <p>The 2021 renovation (€3.2M invested by current owner) addressed MEP systems, common areas, and facade restoration. No significant CapEx is anticipated within the first 5 years. Remaining items are cosmetic tenant improvements estimated at <strong>€150/sqm</strong> upon lease turnover. <span class="cite-im">[p.18]</span> <span class="cite-model">[modeled]</span></p>
+      <p>The 2023 renovation ($18M / $97/SF invested by current owner) addressed all major building systems. The Property Condition Assessment (PCA) estimates <strong>$1.2M</strong> in deferred maintenance over the first 5 years, primarily elevator cab finishes and roofing membrane. Tenant improvement allowances for upcoming rollovers are budgeted at <strong>$65/SF</strong>. <span class="cite-im">[p.18]</span> <span class="cite-model">[modeled]</span></p>
+    `,
+  },
+  {
+    id: "underwriting",
+    title: "Underwriting & Debt Analysis",
+    html: `
+      <h3>Income & Expense Summary</h3>
+      <table>
+        <tr><th>Line Item</th><th>Year 1 ($)</th><th>$/SF</th><th>% EGI</th></tr>
+        <tr><td>Gross Potential Rent</td><td>$14,892,000</td><td>$79.89</td><td>&mdash;</td></tr>
+        <tr><td>Vacancy & Credit Loss (8.7%)</td><td>($1,295,600)</td><td>($6.95)</td><td>&mdash;</td></tr>
+        <tr><td>Effective Gross Income</td><td>$13,596,400</td><td>$72.94</td><td>100%</td></tr>
+        <tr><td>Operating Expenses</td><td>($5,374,400)</td><td>($28.83)</td><td>39.5%</td></tr>
+        <tr><td>Real Estate Taxes</td><td>($1,335,000)</td><td>($7.16)</td><td>9.8%</td></tr>
+        <tr><td><strong>Net Operating Income</strong></td><td><strong>$6,887,000</strong></td><td><strong>$36.95</strong></td><td><strong>50.7%</strong></td></tr>
+      </table>
+
+      <h3>Debt Service Coverage Analysis</h3>
+      <p>Based on the proposed financing structure, the property demonstrates strong debt coverage metrics across all scenarios: <span class="cite-model">[modeled]</span></p>
+      <table>
+        <tr><th>Metric</th><th>Proposed</th><th>Lender Min.</th><th>Status</th></tr>
+        <tr><td>Loan Amount</td><td>$85,200,000</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>Loan-to-Value (LTV)</td><td>60.0%</td><td>&le; 65%</td><td>Pass</td></tr>
+        <tr><td>Debt Service Coverage (DSCR)</td><td>1.42x</td><td>&ge; 1.25x</td><td>Pass</td></tr>
+        <tr><td>Debt Yield</td><td>8.1%</td><td>&ge; 7.5%</td><td>Pass</td></tr>
+        <tr><td>Interest Rate</td><td>5.25% Fixed</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>Amortization</td><td>30 years</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>Annual Debt Service</td><td>$4,848,000</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>After-Debt Cash Flow</td><td>$2,039,000</td><td>&mdash;</td><td>&mdash;</td></tr>
+      </table>
+
+      <h3>Stress Test — DSCR Sensitivity</h3>
+      <p>The property maintains adequate debt coverage even under adverse scenarios: <span class="cite-model">[modeled]</span></p>
+      <table>
+        <tr><th>Scenario</th><th>NOI</th><th>DSCR</th></tr>
+        <tr><td>Base Case</td><td>$6,887,000</td><td>1.42x</td></tr>
+        <tr><td>Deloitte Non-Renewal</td><td>$5,248,000</td><td>1.08x</td></tr>
+        <tr><td>15% Rent Decline</td><td>$5,854,000</td><td>1.21x</td></tr>
+        <tr><td>20% Vacancy</td><td>$5,510,000</td><td>1.14x</td></tr>
+      </table>
+      <p><em>Note: Deloitte non-renewal scenario assumes 12-month downtime + $65/SF TI cost. Breakeven occupancy is 70.4%.</em></p>
     `,
   },
   {
@@ -68,25 +113,26 @@ export const MOCK_MEMO_SECTIONS = [
     title: "Investment Thesis",
     html: `
       <h3>Core-Plus Return Profile</h3>
-      <p>The deal offers a <strong>core-plus return profile</strong> with multiple value creation levers: <span class="cite-model">[modeled]</span></p>
+      <p>The acquisition offers a <strong>core-plus return profile</strong> with multiple value creation levers: <span class="cite-model">[modeled]</span></p>
       <ul>
-        <li><strong>Contractual Escalation:</strong> ILAT indexation provides 2.5-3.0% annual rental growth on in-place leases</li>
-        <li><strong>Reversionary Upside:</strong> In-place rents average €800/sqm vs. ERV of €920/sqm — a 15% reversion potential upon lease expiry</li>
-        <li><strong>Vacancy Fill:</strong> Ground-floor retail unit (290 sqm) can be leased at €950/sqm given prime boulevard frontage</li>
-        <li><strong>Cap Rate Compression:</strong> Paris CBD prime yields have compressed from 3.8% to 3.4% over 2024-2025; further tightening expected</li>
+        <li><strong>Contractual Escalation:</strong> 2.5-3.0% annual rent bumps embedded in all major leases provide organic NOI growth</li>
+        <li><strong>Reversionary Upside:</strong> In-place office rents average $79.89/SF vs. market of $82.50/SF — 3.3% mark-to-market opportunity on rollover</li>
+        <li><strong>Vacancy Fill:</strong> 16,200 SF of vacant space can be leased at market rates ($82-85/SF office, $130/SF retail), adding ~$1.4M to NOI</li>
+        <li><strong>Basis Advantage:</strong> $762/SF acquisition basis vs. $925-1,180/SF corridor comps provides downside protection</li>
       </ul>
 
-      <h3>Financial Summary</h3>
+      <h3>Return Summary</h3>
       <table>
         <tr><th>Metric</th><th>Base Case</th><th>Downside</th><th>Upside</th></tr>
-        <tr><td>Acquisition Price</td><td>€45.0M</td><td>€45.0M</td><td>€45.0M</td></tr>
-        <tr><td>Going-in Cap Rate</td><td>4.2%</td><td>4.2%</td><td>4.2%</td></tr>
-        <tr><td>Exit Cap Rate (Yr 7)</td><td>3.8%</td><td>4.5%</td><td>3.5%</td></tr>
-        <tr><td>Levered IRR</td><td>16.2%</td><td>10.8%</td><td>19.7%</td></tr>
-        <tr><td>Equity Multiple</td><td>2.1x</td><td>1.7x</td><td>2.4x</td></tr>
-        <tr><td>Cash-on-Cash (Yr 1)</td><td>5.8%</td><td>5.8%</td><td>5.8%</td></tr>
+        <tr><td>Acquisition Price</td><td>$142.0M</td><td>$142.0M</td><td>$142.0M</td></tr>
+        <tr><td>Going-in Cap Rate</td><td>4.85%</td><td>4.85%</td><td>4.85%</td></tr>
+        <tr><td>Exit Cap Rate (Yr 7)</td><td>4.50%</td><td>5.25%</td><td>4.00%</td></tr>
+        <tr><td>Levered IRR</td><td>14.8%</td><td>9.4%</td><td>18.6%</td></tr>
+        <tr><td>Equity Multiple</td><td>2.0x</td><td>1.6x</td><td>2.3x</td></tr>
+        <tr><td>Cash-on-Cash (Yr 1)</td><td>3.6%</td><td>3.6%</td><td>3.6%</td></tr>
+        <tr><td>DSCR (Yr 1)</td><td>1.42x</td><td>1.42x</td><td>1.42x</td></tr>
       </table>
-      <p><em>Assumes 55% LTV at 3.2% fixed rate, 7-year hold.</em> <span class="cite-model">[modeled]</span></p>
+      <p><em>Assumes 60% LTV at 5.25% fixed rate, 30-yr amortization, 7-year hold.</em> <span class="cite-model">[modeled]</span></p>
     `,
   },
   {
@@ -94,10 +140,11 @@ export const MOCK_MEMO_SECTIONS = [
     title: "Risk Factors",
     html: `
       <ul>
-        <li><strong>Tenant Concentration:</strong> Société Générale represents 49% of GLA. A non-renewal at the 2028 break would require 12-18 months of downtime and TI spend. <em>Mitigant:</em> SG has invested in fit-out and the 9th arrondissement location aligns with their operational hub strategy. <span class="cite-im">[p.22]</span></li>
-        <li><strong>Interest Rate Sensitivity:</strong> A 100bps increase in exit cap rate reduces levered IRR to 12.4%. <span class="cite-model">[modeled]</span></li>
-        <li><strong>Regulatory Risk:</strong> French DPE regulations may require additional energy upgrades post-2030 for buildings rated below C. Current B rating provides a buffer but should be monitored. <span class="cite-web">[ADEME 2025]</span></li>
-        <li><strong>Liquidity Risk:</strong> Lot size (€45M) is within the most liquid segment for Paris office transactions. No concerns on exit marketability. <span class="cite-web">[CBRE France 2025]</span></li>
+        <li><strong>Tenant Concentration:</strong> Deloitte represents 38% of NRA and 37% of rental income. A non-renewal at 2032 expiry would require significant re-leasing effort. <em>Mitigant:</em> Deloitte invested $12M in buildout (2021) and the location serves their Northeast advisory practice — relocation unlikely. <span class="cite-im">[p.22]</span></li>
+        <li><strong>Interest Rate Sensitivity:</strong> A 100bps increase in the exit cap rate reduces levered IRR from 14.8% to 10.2%. Refinancing risk is moderate given current rate environment. <span class="cite-model">[modeled]</span></li>
+        <li><strong>Near-Term Rollover:</strong> 15.5% of NRA (other office tenants) rolls in 2028-2030. Downtime and TI costs budgeted at $65/SF. <span class="cite-im">[p.14]</span></li>
+        <li><strong>NYC Tax Escalation:</strong> Property tax assessments have increased 4.2% annually over the past 3 years. Budgeted at 3.5% growth. <span class="cite-web">[NYC DOF Property Tax Records]</span></li>
+        <li><strong>Remote Work Impact:</strong> Midtown Class A has proven more resilient (8.7% sub-vacancy vs. 15%+ Class B/C), but structural shifts in office demand remain a macro risk. <span class="cite-web">[Cushman & Wakefield Plaza District]</span></li>
       </ul>
     `,
   },
@@ -105,14 +152,16 @@ export const MOCK_MEMO_SECTIONS = [
     id: "recommendation",
     title: "Recommendation",
     html: `
-      <p>We recommend <strong>proceeding to Letter of Intent</strong> at the asking price of €45,000,000, subject to:</p>
+      <p>We recommend <strong>proceeding to Letter of Intent</strong> at the asking price of $142,000,000, subject to:</p>
       <ul>
-        <li>Confirmation of tenant financial covenants and lease guarantees</li>
-        <li>Technical due diligence on MEP systems (post-renovation warranty review)</li>
-        <li>Environmental Phase I assessment</li>
-        <li>Notarial title review and urban planning compliance</li>
+        <li>Estoppel certificates and tenant financial statements for all leases &gt;5,000 SF</li>
+        <li>Phase I Environmental Site Assessment (ESA)</li>
+        <li>Property Condition Assessment (PCA) with CapEx reserve validation</li>
+        <li>Title and survey review, including air rights and zoning compliance</li>
+        <li>Rent roll audit and operating expense reconciliation (trailing 3 years)</li>
+        <li>Appraisal (MAI-certified) confirming value supports 60% LTV</li>
       </ul>
-      <p>The asset's combination of prime location, investment-grade tenancy, recent renovation, and contractual income growth provides an attractive risk-adjusted entry point in what remains Europe's deepest office investment market. <span class="cite-im">[p.3]</span> <span class="cite-web">[Knight Frank Paris Outlook 2026]</span></p>
+      <p>The asset's combination of Park Avenue location, investment-grade tenancy, recently renovated condition, and strong debt coverage metrics (1.42x DSCR, 8.1% debt yield) provides an attractive risk-adjusted entry point for a core-plus strategy in Manhattan's premier office corridor. <span class="cite-im">[p.3]</span> <span class="cite-web">[CBRE Midtown Manhattan Q4 2025]</span></p>
     `,
   },
 ];
