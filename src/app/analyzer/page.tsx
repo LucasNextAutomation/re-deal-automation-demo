@@ -20,6 +20,8 @@ import {
   Play,
   Clock,
   Settings2,
+  FileText,
+  ExternalLink,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -244,12 +246,19 @@ export default function AnalyzerPage() {
               >
                 <div className="divide-y divide-[var(--color-card-border)]">
                   {EXECUTION_HISTORY.map((exec) => (
-                    <div
+                    <button
                       key={exec.id}
-                      className={`flex items-center gap-3 px-4 py-3 transition-colors ${
+                      type="button"
+                      onClick={() => {
+                        if (exec.id === 67 && !submitted) {
+                          setHistoryOpen(false);
+                          handleTryExample();
+                        }
+                      }}
+                      className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors ${
                         exec.id === 67
-                          ? "bg-[var(--color-accent)]/[0.04]"
-                          : "hover:bg-[var(--color-bg-muted)]"
+                          ? "bg-[var(--color-accent)]/[0.04] cursor-pointer hover:bg-[var(--color-accent)]/[0.08]"
+                          : "opacity-60 cursor-default"
                       }`}
                     >
                       <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--color-bg-muted)] text-[10px] font-bold text-[var(--color-text-muted)]">
@@ -265,7 +274,7 @@ export default function AnalyzerPage() {
                           </span>
                           {exec.id === 67 && (
                             <span className="flex-shrink-0 rounded-full bg-[var(--color-accent)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--color-accent)]">
-                              Current
+                              View Results
                             </span>
                           )}
                         </div>
@@ -276,7 +285,7 @@ export default function AnalyzerPage() {
                       <div className="flex-shrink-0">
                         <Check className="h-4 w-4 text-[var(--color-success)]" />
                       </div>
-                    </div>
+                    </button>
                   ))}
                 </div>
               </motion.div>
@@ -516,6 +525,18 @@ export default function AnalyzerPage() {
                     </p>
                   </div>
                   <div className="flex gap-2">
+                    {isExample && (
+                      <a
+                        href="/examples/crowne-plaza-sfo-cim.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 rounded-md border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/[0.06] px-3 py-1.5 text-xs font-medium text-[var(--color-accent)] transition-all hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/[0.1]"
+                      >
+                        <FileText className="h-3.5 w-3.5" />
+                        View Original CIM
+                        <ExternalLink className="h-3 w-3 opacity-60" />
+                      </a>
+                    )}
                     <button
                       onClick={() => setSourcesOpen((prev) => !prev)}
                       className={`flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs transition-all ${
