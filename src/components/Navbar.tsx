@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Zap } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/analyzer", label: "Analyzer" },
@@ -20,13 +20,17 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-card-border)] bg-[var(--color-bg)]/80 backdrop-blur-xl"
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-accent)]">
-            <Zap className="h-4 w-4 text-white" fill="currentColor" />
-          </div>
+          <Image
+            src="/logo.png"
+            alt="NextAutomation"
+            width={32}
+            height={32}
+            className="rounded-lg invert"
+          />
           <span className="text-lg font-semibold text-white tracking-tight">
-            Next<span className="text-[var(--color-accent)]">Automation</span>
+            NextAutomation
           </span>
         </Link>
 
@@ -57,9 +61,12 @@ export default function Navbar() {
             href="https://nextautomation.us"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-md bg-[var(--color-accent)]/10 px-3 py-1 text-[11px] font-medium text-[var(--color-accent)] transition-colors hover:bg-[var(--color-accent)]/20 sm:block"
+            className="hidden items-center gap-1.5 rounded-lg border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-3 py-1.5 text-[11px] font-medium text-[var(--color-accent)] transition-all hover:bg-[var(--color-accent)]/20 sm:inline-flex"
           >
             nextautomation.us
+            <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
+              <path d="M3.5 3h5.5v5.5M9 3L3 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </a>
         </div>
       </div>

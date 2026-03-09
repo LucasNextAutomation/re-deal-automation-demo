@@ -86,7 +86,7 @@ export default function HomePage() {
               className="mb-6 mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl"
             >
               AI Deal{" "}
-              <span className="bg-gradient-to-r from-[var(--color-accent)] to-[#a5b4fc] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--color-accent)] to-[#60a5fa] bg-clip-text text-transparent">
                 Analyzer
               </span>
             </motion.h1>

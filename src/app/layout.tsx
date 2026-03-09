@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "RE Deal Analyzer — AI-Powered Investment Memos | NextAutomation",
   description:
     "Upload a CIM and get an IC-grade investment memo in minutes. Powered by multi-agent AI analysis.",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

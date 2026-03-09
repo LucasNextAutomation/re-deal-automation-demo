@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0F172A;
-  --color-card: #1E293B;
-  --color-card-border: #334155;
-  --color-accent: #6366F1;
-  --color-accent-dark: #4F46E5;
+  --color-bg: #0b0f14;
+  --color-card: #0f1520;
+  --color-card-border: #1f2a37;
+  --color-accent: #0049B8;
+  --color-accent-dark: #003d9e;
   --color-text: #e0e2eb;
   --color-text-muted: #949ab8;
   --color-error: #ef4444;
@@ -73,7 +73,7 @@ body {
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.08) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 73, 184, 0.08) 50%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 2s linear infinite;
 }
