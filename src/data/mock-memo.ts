@@ -1,191 +1,253 @@
+/* ─── Execution History ─── */
+export const EXECUTION_HISTORY = [
+  { id: 67, name: "Crowne Plaza SFO", type: "Hotel", date: "Feb 11, 2026", status: "complete" as const, agents: 3 },
+  { id: 66, name: "Park Newhall 36-Unit", type: "Multifamily", date: "Feb 11, 2026", status: "complete" as const, agents: 3 },
+  { id: 65, name: "Meridian Tower", type: "Office", date: "Feb 10, 2026", status: "complete" as const, agents: 3 },
+  { id: 64, name: "Gateway Commerce Center", type: "Flex / Office", date: "Feb 9, 2026", status: "complete" as const, agents: 3 },
+];
+
+/* ─── Deal Summary Sections (from n8n execution #67 — Crowne Plaza SFO) ─── */
 export const MOCK_MEMO_SECTIONS = [
   {
-    id: "exec-summary",
-    title: "Executive Summary",
+    id: "opportunity",
+    title: "Opportunity Overview",
+    customizable: true,
     html: `
-      <p><strong>Meridian Tower</strong> is a 186,400 SF Class A office and retail asset located at 350 Park Avenue, Midtown Manhattan, NY, offered at <strong>$142,000,000</strong> representing a going-in cap rate of 4.85%. <span class="cite-im">[p.3]</span></p>
-      <p>The property is 91.3% leased to a diversified mix of investment-grade and creditworthy tenants across 14 leases, anchored by Deloitte LLP (38% of NRA) and Morgan Stanley Wealth Management (22% of NRA). The WAULT stands at 6.4 years. <span class="cite-im">[p.4]</span> <span class="cite-im">[p.14]</span></p>
-      <p>Stabilized NOI of <strong>$6,887,000</strong> supports a Debt Service Coverage Ratio (DSCR) of <strong>1.42x</strong> and a debt yield of <strong>8.1%</strong> at 60% LTV. Our analysis identifies a <strong>14.8% levered IRR over a 7-year hold</strong> under the base case, driven by contractual rent escalation, reversionary upside on below-market leases, and improving Midtown East vacancy dynamics. <span class="cite-model">[modeled]</span></p>
-      <blockquote>Recommendation: <strong>Proceed to LOI</strong> — the asset offers strong risk-adjusted returns with solid debt coverage metrics and limited downside given tenant credit quality and location.</blockquote>
+      <p>Acquire a <strong>309-key full-service Crowne Plaza</strong> adjacent to SFO (3 miles) on a 4.97-acre site with substantial meeting inventory (11,994 SF), strong highway visibility (US-101, ~250,000 vpd) and an unencumbered management/franchise position enabling an immediate reposition/rebrand and value-add plan. <span class="cite-im">[IM p.2]</span> <span class="cite-im">[IM p.4]</span> <span class="cite-im">[IM p.9]</span></p>
+
+      <table>
+        <tr><th>Parameter</th><th>Detail</th></tr>
+        <tr><td>Asset</td><td>Crowne Plaza SFO Airport — 309 keys (incl. 11 suites, 1 presidential)</td></tr>
+        <tr><td>Location</td><td>1177 Airport Blvd, Burlingame, CA 94010</td></tr>
+        <tr><td>Site</td><td>4.97 acres, 10-story tower + two single-story wings</td></tr>
+        <tr><td>Year Built / Converted</td><td>1973 / Crowne Plaza conversion 2002</td></tr>
+        <tr><td>Meeting Space</td><td>11,994 SF across 17 rooms (Plaza Ballroom 5,040 SF)</td></tr>
+        <tr><td>Parking</td><td>337 spaces (277 surface, 60 subterranean)</td></tr>
+        <tr><td>Management</td><td>Offered free of any management encumbrances</td></tr>
+        <tr><td>Franchise</td><td>Crowne Plaza (IHG) — expires July 2017; termination = 36 months fees</td></tr>
+        <tr><td>Asking Price</td><td>NOT PROVIDED <span class="cite-gap">[DATA GAP]</span></td></tr>
+      </table>
+
+      <blockquote>The SFO airport submarket ranks 4th in U.S. RevPAR, with +21.0% YTD growth — the strongest of any top-25 market. The property is positioned for an immediate value-add play through renovation, rebranding, and meeting-space monetization.</blockquote>
     `,
   },
   {
     id: "market-analysis",
-    title: "Market Analysis",
+    title: "Market & Location Analysis",
+    customizable: true,
     html: `
-      <h3>Midtown Manhattan Office Market Overview</h3>
-      <p>The Midtown Manhattan office market continues to recover, with Class A asking rents reaching <strong>$82.50/SF</strong> in Q4 2025, up 2.8% year-over-year. Overall Midtown vacancy has declined to <strong>12.4%</strong>, down from 14.1% a year ago, as return-to-office mandates and flight-to-quality trends strengthen demand for premium assets. <span class="cite-web">[CBRE Midtown Manhattan Q4 2025]</span></p>
-      <p>Net absorption in Midtown totaled <strong>4.2M SF</strong> in 2025, the strongest annual figure since 2019, driven primarily by financial services, legal, and technology sectors. <span class="cite-web">[JLL NYC Office Market Outlook 2026]</span></p>
+      <h3>Market Tier & Connectivity</h3>
+      <p>The SFO Airport full-service hotel submarket is a <strong>Top-Tier gateway airport market</strong>, ranking 4th in U.S. RevPAR behind NYC, Honolulu, and Miami. <span class="cite-im">[IM p.5]</span> Occupancy reached 78.3% YTD 2011 and peaked at ~79% in October 2023. <span class="cite-im">[IM p.23]</span> <span class="cite-web">[STR 2023]</span></p>
+      <ul>
+        <li><strong>Road:</strong> Direct frontage on US-101 (~250,000 vehicles/day) <span class="cite-im">[IM p.5]</span></li>
+        <li><strong>Air:</strong> 3 miles to SFO serving ~39.4M passengers (2010); direct BART link <span class="cite-im">[IM p.8]</span></li>
+        <li><strong>Rail:</strong> Burlingame Caltrain station ~1 mile (Peninsula service to SF/Silicon Valley) <span class="cite-web">[MARKET]</span></li>
+        <li><strong>Walk Score:</strong> 70 (Burlingame citywide) <span class="cite-web">[walkscore.com]</span></li>
+      </ul>
 
+      <h3>Supply & Demand Dynamics</h3>
       <table>
-        <tr><th>Metric</th><th>2023</th><th>2024</th><th>2025</th></tr>
-        <tr><td>Class A Asking Rent ($/SF)</td><td>$78.20</td><td>$80.25</td><td>$82.50</td></tr>
-        <tr><td>Midtown Vacancy Rate</td><td>15.2%</td><td>14.1%</td><td>12.4%</td></tr>
-        <tr><td>Net Absorption (M SF)</td><td>1.8</td><td>3.1</td><td>4.2</td></tr>
-        <tr><td>Investment Sales Volume ($B)</td><td>$8.6</td><td>$11.2</td><td>$14.7</td></tr>
+        <tr><th>Metric</th><th>2009</th><th>2010</th><th>YTD 2011</th><th>2023</th></tr>
+        <tr><td>Submarket Occupancy</td><td>70.8%</td><td>74.6%</td><td>78.3%</td><td>~79%</td></tr>
+        <tr><td>ADR</td><td>$99.30</td><td>$99.57</td><td>$103.24</td><td>$151.13</td></tr>
+        <tr><td>RevPAR Growth (YoY)</td><td>—</td><td>+5.4%</td><td>+14.6%</td><td>+0.3%</td></tr>
       </table>
+      <p><span class="cite-im">[IM p.23]</span> <span class="cite-web">[STR / sftravel.com 2023]</span></p>
 
-      <h3>Submarket: Park Avenue Corridor (46th-57th St)</h3>
-      <p>The Park Avenue corridor between 46th and 57th Streets remains Manhattan's premier office submarket, home to major financial institutions, law firms, and consulting companies. Class A vacancy in this micro-market is <strong>8.7%</strong>, well below the broader Midtown average. <span class="cite-im">[p.8]</span></p>
-      <p>Recent comparable transactions include 375 Park Avenue ($1,050/SF, 4.2% cap), 280 Park Avenue ($925/SF, 4.6% cap), and 425 Park Avenue ($1,180/SF, 3.9% cap). The subject's basis of <strong>$762/SF</strong> represents a compelling entry relative to corridor comps. <span class="cite-web">[Real Capital Analytics]</span></p>
+      <h3>Barriers to Entry</h3>
+      <ul>
+        <li>FAA Part 77 height restrictions around SFO <span class="cite-web">[MARKET]</span></li>
+        <li>Extremely limited developable land in Burlingame — no material new full-service hotel pipeline <span class="cite-web">[asianhospitality.com]</span></li>
+        <li>High entitlement costs and CEQA environmental review requirements <span class="cite-web">[MARKET]</span></li>
+      </ul>
+
+      <h3>Demographics</h3>
+      <table>
+        <tr><th>Metric</th><th>Value</th></tr>
+        <tr><td>Population (Burlingame)</td><td>~30,500</td></tr>
+        <tr><td>Median Household Income</td><td>$168,832</td></tr>
+        <tr><td>Unemployment (San Mateo Co.)</td><td>3.4%</td></tr>
+        <tr><td>Major Employers</td><td>SFO, United Airlines, Genentech, Meta, Oracle, Visa, LinkedIn</td></tr>
+      </table>
+      <p><span class="cite-web">[Census / BLS 2023]</span></p>
     `,
   },
   {
     id: "asset-assessment",
     title: "Asset Assessment",
+    customizable: true,
     html: `
-      <h3>Property Description</h3>
-      <p>Meridian Tower is a <strong>32-story</strong> Class A office tower with ground-floor retail, totaling <strong>186,400 SF</strong> (170,200 SF office / 16,200 SF retail). Originally constructed in 1963, the property underwent a comprehensive $18M capital improvement program completed in 2023, including full lobby renovation, elevator modernization, MEP upgrades, and new curtain wall glazing. <span class="cite-im">[p.5]</span> <span class="cite-im">[p.6]</span></p>
+      <h3>Building Metrics</h3>
+      <p>The Crowne Plaza consists of a <strong>10-story interior corridor tower</strong> with two single-story wings above one level of subterranean parking. Built in 1973 and converted to Crowne Plaza in 2002, with guest bath refresh in 2007-08. <span class="cite-im">[IM p.7]</span> <span class="cite-im">[IM p.9]</span></p>
 
+      <h3>Room Mix</h3>
       <table>
-        <tr><th>Characteristic</th><th>Detail</th></tr>
-        <tr><td>Address</td><td>350 Park Avenue, New York, NY 10022</td></tr>
-        <tr><td>Year Built / Renovated</td><td>1963 / 2023</td></tr>
-        <tr><td>Total GLA</td><td>186,400 SF (Office: 170,200 / Retail: 16,200)</td></tr>
-        <tr><td>Floors</td><td>32 above grade, 2 below</td></tr>
-        <tr><td>Zoning</td><td>C5-3 (as-of-right commercial)</td></tr>
-        <tr><td>ENERGY STAR Score</td><td>82 / 100</td></tr>
-        <tr><td>Parking</td><td>None (3 garage facilities within 1 block)</td></tr>
-        <tr><td>Tax Lot</td><td>Block 1305, Lot 6</td></tr>
+        <tr><th>Room Type</th><th>Count</th></tr>
+        <tr><td>King</td><td>119</td></tr>
+        <tr><td>Double/Double</td><td>133</td></tr>
+        <tr><td>Queen</td><td>46</td></tr>
+        <tr><td>Suite</td><td>10</td></tr>
+        <tr><td>Presidential Suite</td><td>1</td></tr>
+        <tr><td><strong>Total</strong></td><td><strong>309</strong></td></tr>
       </table>
+      <p><span class="cite-im">[IM p.11]</span></p>
 
-      <h3>Tenant Schedule</h3>
-      <p>The property is <strong>91.3%</strong> occupied across 14 leases. Major tenants include two investment-grade anchors representing 60% of NRA. All leases contain annual escalations of 2.5-3.0%. <span class="cite-im">[p.14]</span></p>
-
-      <table>
-        <tr><th>Tenant</th><th>SF</th><th>% NRA</th><th>Rent ($/SF)</th><th>Expiry</th><th>Credit</th></tr>
-        <tr><td>Deloitte LLP</td><td>70,832</td><td>38.0%</td><td>$76.00</td><td>2032</td><td>Inv. Grade</td></tr>
-        <tr><td>Morgan Stanley WM</td><td>41,008</td><td>22.0%</td><td>$82.00</td><td>2031</td><td>Inv. Grade</td></tr>
-        <tr><td>Kirkland & Ellis</td><td>18,640</td><td>10.0%</td><td>$85.00</td><td>2030</td><td>Strong</td></tr>
-        <tr><td>Citadel Securities</td><td>14,912</td><td>8.0%</td><td>$88.00</td><td>2033</td><td>Strong</td></tr>
-        <tr><td>Retail (3 tenants)</td><td>14,580</td><td>7.8%</td><td>$125.00</td><td>Various</td><td>Varies</td></tr>
-        <tr><td>Other Office (4)</td><td>10,228</td><td>5.5%</td><td>$74.00</td><td>2028-30</td><td>Moderate</td></tr>
-        <tr><td><em>Vacant</em></td><td>16,200</td><td>8.7%</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-      </table>
-
-      <h3>Condition & CapEx</h3>
-      <p>The 2023 renovation ($18M / $97/SF invested by current owner) addressed all major building systems. The Property Condition Assessment (PCA) estimates <strong>$1.2M</strong> in deferred maintenance over the first 5 years, primarily elevator cab finishes and roofing membrane. Tenant improvement allowances for upcoming rollovers are budgeted at <strong>$65/SF</strong>. <span class="cite-im">[p.18]</span> <span class="cite-model">[modeled]</span></p>
-    `,
-  },
-  {
-    id: "underwriting",
-    title: "Underwriting & Debt Analysis",
-    html: `
-      <h3>Income & Expense Summary</h3>
-      <table>
-        <tr><th>Line Item</th><th>Year 1 ($)</th><th>$/SF</th><th>% EGI</th></tr>
-        <tr><td>Gross Potential Rent</td><td>$14,892,000</td><td>$79.89</td><td>&mdash;</td></tr>
-        <tr><td>Vacancy & Credit Loss (8.7%)</td><td>($1,295,600)</td><td>($6.95)</td><td>&mdash;</td></tr>
-        <tr><td>Effective Gross Income</td><td>$13,596,400</td><td>$72.94</td><td>100%</td></tr>
-        <tr><td>Operating Expenses</td><td>($5,374,400)</td><td>($28.83)</td><td>39.5%</td></tr>
-        <tr><td>Real Estate Taxes</td><td>($1,335,000)</td><td>($7.16)</td><td>9.8%</td></tr>
-        <tr><td><strong>Net Operating Income</strong></td><td><strong>$6,887,000</strong></td><td><strong>$36.95</strong></td><td><strong>50.7%</strong></td></tr>
-      </table>
-
-      <h3>Debt Service Coverage Analysis</h3>
-      <p>Based on the proposed financing structure, the property demonstrates strong debt coverage metrics across all scenarios: <span class="cite-model">[modeled]</span></p>
-      <table>
-        <tr><th>Metric</th><th>Proposed</th><th>Lender Min.</th><th>Status</th></tr>
-        <tr><td>Loan Amount</td><td>$85,200,000</td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Loan-to-Value (LTV)</td><td>60.0%</td><td>&le; 65%</td><td>Pass</td></tr>
-        <tr><td>Debt Service Coverage (DSCR)</td><td>1.42x</td><td>&ge; 1.25x</td><td>Pass</td></tr>
-        <tr><td>Debt Yield</td><td>8.1%</td><td>&ge; 7.5%</td><td>Pass</td></tr>
-        <tr><td>Interest Rate</td><td>5.25% Fixed</td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Amortization</td><td>30 years</td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Annual Debt Service</td><td>$4,848,000</td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>After-Debt Cash Flow</td><td>$2,039,000</td><td>&mdash;</td><td>&mdash;</td></tr>
-      </table>
-
-      <h3>Stress Test — DSCR Sensitivity</h3>
-      <p>The property maintains adequate debt coverage even under adverse scenarios: <span class="cite-model">[modeled]</span></p>
-      <table>
-        <tr><th>Scenario</th><th>NOI</th><th>DSCR</th></tr>
-        <tr><td>Base Case</td><td>$6,887,000</td><td>1.42x</td></tr>
-        <tr><td>Deloitte Non-Renewal</td><td>$5,248,000</td><td>1.08x</td></tr>
-        <tr><td>15% Rent Decline</td><td>$5,854,000</td><td>1.21x</td></tr>
-        <tr><td>20% Vacancy</td><td>$5,510,000</td><td>1.14x</td></tr>
-      </table>
-      <p><em>Note: Deloitte non-renewal scenario assumes 12-month downtime + $65/SF TI cost. Breakeven occupancy is 70.4%.</em></p>
-    `,
-  },
-  {
-    id: "investment-thesis",
-    title: "Investment Thesis",
-    html: `
-      <h3>Core-Plus Return Profile</h3>
-      <p>The acquisition offers a <strong>core-plus return profile</strong> with multiple value creation levers: <span class="cite-model">[modeled]</span></p>
+      <h3>Amenities & F&B</h3>
       <ul>
-        <li><strong>Contractual Escalation:</strong> 2.5-3.0% annual rent bumps embedded in all major leases provide organic NOI growth</li>
-        <li><strong>Reversionary Upside:</strong> In-place office rents average $79.89/SF vs. market of $82.50/SF — 3.3% mark-to-market opportunity on rollover</li>
-        <li><strong>Vacancy Fill:</strong> 16,200 SF of vacant space can be leased at market rates ($82-85/SF office, $130/SF retail), adding ~$1.4M to NOI</li>
-        <li><strong>Basis Advantage:</strong> $762/SF acquisition basis vs. $925-1,180/SF corridor comps provides downside protection</li>
+        <li>West Bay Café & Lounge — full-service restaurant/bar, 24-hour room service <span class="cite-im">[IM p.5]</span></li>
+        <li>Indoor swimming pool & whirlpool, fitness center, business center <span class="cite-im">[IM p.7]</span></li>
+        <li>Gift shop (leased to Amerika International), barber shop (Michael's Barber Shop) <span class="cite-im">[IM p.10]</span></li>
+        <li>Complimentary airport shuttle, wireless internet <span class="cite-im">[IM p.7]</span></li>
       </ul>
 
-      <h3>Return Summary</h3>
+      <h3>Competitive Set</h3>
       <table>
-        <tr><th>Metric</th><th>Base Case</th><th>Downside</th><th>Upside</th></tr>
-        <tr><td>Acquisition Price</td><td>$142.0M</td><td>$142.0M</td><td>$142.0M</td></tr>
-        <tr><td>Going-in Cap Rate</td><td>4.85%</td><td>4.85%</td><td>4.85%</td></tr>
-        <tr><td>Exit Cap Rate (Yr 7)</td><td>4.50%</td><td>5.25%</td><td>4.00%</td></tr>
-        <tr><td>Levered IRR</td><td>14.8%</td><td>9.4%</td><td>18.6%</td></tr>
-        <tr><td>Equity Multiple</td><td>2.0x</td><td>1.6x</td><td>2.3x</td></tr>
-        <tr><td>Cash-on-Cash (Yr 1)</td><td>3.6%</td><td>3.6%</td><td>3.6%</td></tr>
-        <tr><td>DSCR (Yr 1)</td><td>1.42x</td><td>1.42x</td><td>1.42x</td></tr>
+        <tr><th>Hotel</th><th>Location</th></tr>
+        <tr><td>Hilton SF Airport</td><td>600 Airport Blvd</td></tr>
+        <tr><td>Doubletree SF Airport</td><td>835 Airport Blvd</td></tr>
+        <tr><td>Hilton Garden Inn SF Airport</td><td>765 Airport Blvd</td></tr>
+        <tr><td>Clarion SF Airport</td><td>401 E. Millbrae Ave</td></tr>
+        <tr><td>Radisson SF Bay Front</td><td>5000 Sierra Point Pkwy</td></tr>
       </table>
-      <p><em>Assumes 60% LTV at 5.25% fixed rate, 30-yr amortization, 7-year hold.</em> <span class="cite-model">[modeled]</span></p>
+      <p>Crowne Plaza's ADR index fell from 115% to 99% of comp set by July 2011, signaling value-add upside via renovation/brand repositioning. <span class="cite-im">[IM p.24]</span></p>
+
+      <h3>Labor & Franchise</h3>
+      <ul>
+        <li><strong>Union labor:</strong> Local 39 (Engineers), Local 856 (Front Desk, Bell Stand, Accounting), Local 2 Unite Here (Restaurant, Banquets) <span class="cite-im">[IM p.7]</span></li>
+        <li><strong>Franchise fees:</strong> 5% royalty + 3% marketing + $11.34/room technology fee <span class="cite-im">[IM p.4]</span></li>
+      </ul>
     `,
   },
   {
-    id: "risk-factors",
-    title: "Risk Factors",
+    id: "financial-analysis",
+    title: "Financial Analysis",
+    customizable: true,
+    html: `
+      <h3>Historical Operating Performance</h3>
+      <table>
+        <tr><th>Metric</th><th>2008</th><th>2009</th><th>2010</th><th>2011F</th></tr>
+        <tr><td>Total Revenue</td><td>$12.04M</td><td>$10.34M</td><td>$10.46M</td><td>$11.78M</td></tr>
+        <tr><td>GOP Margin</td><td>15.1%</td><td>9.2%</td><td>—</td><td>9.2%</td></tr>
+        <tr><td>NOI</td><td>$0.15M</td><td>($1.24M)</td><td>—</td><td>$0.25M</td></tr>
+        <tr><td>NOI Margin</td><td>1.3%</td><td>(12.0%)</td><td>—</td><td>2.1%</td></tr>
+      </table>
+      <p><span class="cite-im">[IM p.26]</span></p>
+
+      <h3>Modeled Stabilized Performance (Year 4-5)</h3>
+      <table>
+        <tr><th>Line Item</th><th>Modeled</th><th>Source</th></tr>
+        <tr><td>Rooms Revenue</td><td>$12.5M</td><td><span class="cite-model">[MODELED]</span></td></tr>
+        <tr><td>F&B Revenue</td><td>$3.1M</td><td><span class="cite-model">[MODELED]</span></td></tr>
+        <tr><td>Other Revenue</td><td>$82K</td><td><span class="cite-model">[MODELED]</span></td></tr>
+        <tr><td>ADR (Stabilized)</td><td>$136.75</td><td><span class="cite-im">[IM p.30]</span></td></tr>
+        <tr><td>Occupancy (Stabilized)</td><td>81%</td><td><span class="cite-im">[IM p.30]</span></td></tr>
+        <tr><td>NOI (Stabilized)</td><td>~$3.0M</td><td><span class="cite-im">[IM p.31]</span></td></tr>
+        <tr><td>NOI Margin</td><td>17.8%</td><td><span class="cite-im">[IM p.31]</span></td></tr>
+      </table>
+
+      <h3>Return & Debt Analysis</h3>
+      <table>
+        <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+        <tr><td>Asking Price</td><td>NOT PROVIDED</td><td><span class="cite-gap">[DATA GAP]</span></td></tr>
+        <tr><td>Going-in Cap Rate</td><td>CANNOT CALCULATE</td><td><span class="cite-gap">[DATA GAP]</span></td></tr>
+        <tr><td>Target Gross IRR</td><td>12%</td><td><span class="cite-model">[MODELED]</span></td></tr>
+        <tr><td>Assumed LTV</td><td>60-65%</td><td><span class="cite-web">[MARKET]</span></td></tr>
+        <tr><td>Assumed Rate</td><td>~4.5-5.0% fixed</td><td><span class="cite-web">[MARKET]</span></td></tr>
+        <tr><td>Year 1 DSCR</td><td>&lt;1.0x (negative CF)</td><td><span class="cite-model">[MODELED]</span></td></tr>
+        <tr><td>Market Cap Rate Range</td><td>6.0%-7.0%</td><td><span class="cite-web">[MARKET]</span></td></tr>
+        <tr><td>FF&E Reserve</td><td>4% of revenue</td><td><span class="cite-im">[IM p.26]</span></td></tr>
+      </table>
+
+      <h3>Exit Sensitivity</h3>
+      <table>
+        <tr><th>Stabilized NOI</th><th>Exit Cap 7.0%</th><th>Exit Cap 6.5%</th><th>Exit Cap 6.0%</th></tr>
+        <tr><td>$3.0M</td><td>$42.9M</td><td>$46.2M</td><td>$50.0M</td></tr>
+        <tr><td>$3.2M (broker model)</td><td>$45.7M</td><td>$49.2M</td><td>$53.3M</td></tr>
+        <tr><td>$10M (aggressive est.)</td><td>$142.9M</td><td>$153.8M</td><td>$166.7M</td></tr>
+      </table>
+      <p><span class="cite-model">[MODELED]</span> <span class="cite-web">[MARKET]</span></p>
+    `,
+  },
+  {
+    id: "value-creation",
+    title: "Value Creation Plan",
+    customizable: true,
     html: `
       <ul>
-        <li><strong>Tenant Concentration:</strong> Deloitte represents 38% of NRA and 37% of rental income. A non-renewal at 2032 expiry would require significant re-leasing effort. <em>Mitigant:</em> Deloitte invested $12M in buildout (2021) and the location serves their Northeast advisory practice — relocation unlikely. <span class="cite-im">[p.22]</span></li>
-        <li><strong>Interest Rate Sensitivity:</strong> A 100bps increase in the exit cap rate reduces levered IRR from 14.8% to 10.2%. Refinancing risk is moderate given current rate environment. <span class="cite-model">[modeled]</span></li>
-        <li><strong>Near-Term Rollover:</strong> 15.5% of NRA (other office tenants) rolls in 2028-2030. Downtime and TI costs budgeted at $65/SF. <span class="cite-im">[p.14]</span></li>
-        <li><strong>NYC Tax Escalation:</strong> Property tax assessments have increased 4.2% annually over the past 3 years. Budgeted at 3.5% growth. <span class="cite-web">[NYC DOF Property Tax Records]</span></li>
-        <li><strong>Remote Work Impact:</strong> Midtown Class A has proven more resilient (8.7% sub-vacancy vs. 15%+ Class B/C), but structural shifts in office demand remain a macro risk. <span class="cite-web">[Cushman & Wakefield Plaza District]</span></li>
+        <li><strong>Renovation & ADR Uplift:</strong> Soft-goods/guestroom refresh estimated $5K-$7K/room (total $1.5M-$2.2M) plus public-space upgrades and technology packages. Target ADR ramp from $83.60 (2010) → $95.00 (Year 1) → $136.75 (stabilized Year 4). <span class="cite-im">[IM p.30]</span> <span class="cite-model">[ESTIMATED]</span></li>
+        <li><strong>Revenue Management:</strong> Reprice and capture higher transient, corporate, and group rates. Optimize 11,994 SF of meeting space across 17 rooms for group/MICE revenue. Current ADR index at 99% of comp set vs. historical peak of 115% — significant recapture opportunity. <span class="cite-im">[IM p.24]</span></li>
+        <li><strong>Rebranding Optionality:</strong> Property offered free of management. Crowne Plaza franchise expires July 2017 — flexibility to rebrand to higher-tier flag (Hilton, Marriott) or soft brand. <span class="cite-im">[IM p.5]</span> <span class="cite-im">[IM p.4]</span></li>
+        <li><strong>Ancillary Development:</strong> 4,600 SF retail pad already identified and marketed — opportunity for lease or JV to drive ancillary income. <span class="cite-im">[IM p.6]</span></li>
+        <li><strong>Operational Improvements:</strong> Tighten departmental expense ratios, improve F&B margins (currently high-cost), and optimize contracted business rates that presently lag comps. <span class="cite-im">[IM p.30]</span></li>
+      </ul>
+    `,
+  },
+  {
+    id: "risk-assessment",
+    title: "Risk Assessment",
+    customizable: true,
+    html: `
+      <ul>
+        <li><strong>Missing Price / TTM NOI:</strong> <span class="cite-gap">[CRITICAL]</span> Asking price and trailing-twelve-month financials are not provided. Cannot calculate going-in cap rate, leverage returns, or finalize underwriting. The package is rated <strong>INCOMPLETE</strong> for commitment. <span class="cite-im">[IM]</span></li>
+        <li><strong>Execution & CapEx Risk:</strong> Substantial FF&E and public-space investment required in Year 1-2 to deliver ADR targets. Renovation downtime and cost-overrun risk. ADR ramp expectations (21% Year 1→2, 13% Year 2→3) exceed submarket historical ADR growth of 5-7%. <span class="cite-im">[IM p.23]</span> <span class="cite-model">[ESTIMATED]</span></li>
+        <li><strong>Franchise / Exit Cost:</strong> Franchise expiration (July 2017) may impose liquidated-damages exit cost (~36 months of fees: 5% royalty, 3% service, $11.34/room tech fee). Complicates future rebrand or buyer sale timeline. <span class="cite-im">[IM p.4]</span></li>
+        <li><strong>Revenue Concentration & Cyclicality:</strong> Heavy reliance on airport/contract business (&gt;60% of room nights). Sensitivity to airline traffic patterns and economic cycles. Historic NOI volatility: +$0.15M (2008) → -$1.24M (2009). <span class="cite-im">[IM p.26]</span></li>
+        <li><strong>Interest Rate / Cap Rate Sensitivity:</strong> Market full-service cap rates ~6.0-7.0%. Exit valuation is sensitive to prevailing rates — rising rates could compress valuation and refinance options. <span class="cite-web">[MARKET]</span></li>
+        <li><strong>Union Labor:</strong> Three unions (Local 39, 856, 2 Unite Here) — elevated labor cost risk and operational inflexibility during renovation. <span class="cite-im">[IM p.7]</span></li>
+      </ul>
+
+      <h3>Data Discrepancies Flagged</h3>
+      <ul>
+        <li>Historical NOI margins show negative or low NOI through 2011F (NOI margin -2.7%) while modeled projections show steady ramp to ~18% by Year 4-5 — underscores execution risk and dependence on successful repositioning. <span class="cite-im">[IM p.26]</span> <span class="cite-im">[IM p.28]</span></li>
+        <li>Modeled stabilized NOI (~$10M) vs. broker model NOI ($3.0-3.2M in Year 4-5) — significant discrepancy requires reconciliation. <span class="cite-model">[MODELED]</span></li>
       </ul>
     `,
   },
   {
     id: "recommendation",
     title: "Recommendation",
+    customizable: true,
     html: `
-      <p>We recommend <strong>proceeding to Letter of Intent</strong> at the asking price of $142,000,000, subject to:</p>
-      <ul>
-        <li>Estoppel certificates and tenant financial statements for all leases &gt;5,000 SF</li>
-        <li>Phase I Environmental Site Assessment (ESA)</li>
-        <li>Property Condition Assessment (PCA) with CapEx reserve validation</li>
-        <li>Title and survey review, including air rights and zoning compliance</li>
-        <li>Rent roll audit and operating expense reconciliation (trailing 3 years)</li>
-        <li>Appraisal (MAI-certified) confirming value supports 60% LTV</li>
-      </ul>
-      <p>The asset's combination of Park Avenue location, investment-grade tenancy, recently renovated condition, and strong debt coverage metrics (1.42x DSCR, 8.1% debt yield) provides an attractive risk-adjusted entry point for a core-plus strategy in Manhattan's premier office corridor. <span class="cite-im">[p.3]</span> <span class="cite-web">[CBRE Midtown Manhattan Q4 2025]</span></p>
+      <blockquote><strong>Conditional Proceed to Indicative Bid → NOT YET:</strong> Data Insufficient for firm bid. The asset has a compelling location, tangible value-add levers, and modeled stabilized NOI that could support institutional pricing — but the absence of asking price and TTM NOI prevents completion of underwriting.</blockquote>
+
+      <h3>Required Next Steps (before IC approval)</h3>
+      <ol style="padding-left:20px;margin:12px 0">
+        <li style="margin-bottom:8px">Obtain the seller's <strong>Asking Price</strong> and complete financial package (TTM P&L, NOI bridge, detailed departmental revenues and expenses) — critical gating items</li>
+        <li style="margin-bottom:8px">Secure <strong>lender term sheets</strong> or debt assumption confirmation (65% LTC / ~4.5%) to test leverage sensitivity</li>
+        <li style="margin-bottom:8px">Commission an updated <strong>capital needs assessment</strong> (line-item FF&E and building systems scope and cost) to replace estimated $5K-7K/room with contractor-cost-backed numbers</li>
+        <li style="margin-bottom:8px">Run <strong>three price scenarios</strong> (best / base / downside) mapping purchase price → stabilized NOI → exit cap to modeled IRR and cash-on-cash, stressing higher interest rates and slower ADR ramp</li>
+        <li style="margin-bottom:8px">Confirm <strong>franchise/transfer cost</strong> exposure and legal implications of franchise expiry</li>
+        <li style="margin-bottom:8px">Conduct focused <strong>market follow-up</strong> on recent comparable SFO-area full-service hotel trades to validate 6.0-7.0% cap rate benchmark</li>
+      </ol>
+
+      <p>If seller price and TTM NOI allow a pro forma that (a) supports an acquisition cap rate in-line with modeled sensitivities (preferably ≥6.5% on stabilized NOI) and (b) produces ≥12% gross IRR under conservative financing assumptions, proceed to submit an indicative offer and begin detailed due diligence. If not, pass or consider a structured offer with price contingent on verified TTM NOI and capital cost adjustments.</p>
+      <p><em>Prepared by: AI Investment Committee — synthesizing Market, Asset & Investment analyst inputs.</em> <span class="cite-im">[IM]</span> <span class="cite-web">[MARKET]</span> <span class="cite-model">[MODELED]</span></p>
     `,
   },
 ];
 
+/* ─── Processing Pipeline Steps ─── */
 export const MOCK_PROCESSING_STEPS = [
   { id: "upload", label: "Uploading document" },
   { id: "ocr", label: "Extracting text & tables (Gemini OCR)" },
   { id: "extract", label: "Identifying deal parameters" },
   { id: "segment", label: "Segmenting into analysis categories" },
-  { id: "agents", label: "Running parallel analysis agents" },
-  { id: "memo", label: "Generating IC memo" },
+  { id: "agents", label: "Running parallel analysis agents (Market · Asset · Investment)" },
+  { id: "memo", label: "Generating deal summary" },
 ];
 
 export const STEP_DELAYS = [800, 1400, 1200, 1600, 2200, 1600];
 
+/* ─── Extracted Fields (from n8n execution #67) ─── */
 export const MOCK_EXTRACTED_FIELDS = {
-  assetName: "Meridian Tower",
-  location: "350 Park Avenue, Midtown Manhattan, NY",
-  assetType: "Class A Office + Retail",
-  askingPrice: "$142,000,000",
-  gla: "186,400 SF",
-  occupancy: "91.3%",
-  capRate: "4.85%",
-  wault: "6.4 years",
-  yearBuilt: "1963 / Renovated 2023",
-  pages: 10,
+  assetName: "Crowne Plaza SFO Airport",
+  location: "1177 Airport Blvd, Burlingame, CA",
+  assetType: "Full-Service Hotel",
+  askingPrice: "Not Disclosed",
+  rooms: "309 (incl. 11 suites)",
+  occupancy: "~78% (submarket)",
+  revparGrowth: "+21.0% YTD",
+  meetingSpace: "11,994 SF (17 rooms)",
+  yearBuilt: "1973 / Converted 2002",
+  pages: 32,
 };

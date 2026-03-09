@@ -16,8 +16,10 @@ import {
   Ruler,
   Users,
   TrendingUp,
-  Calendar,
+  BarChart3,
   Play,
+  Clock,
+  Settings2,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -26,6 +28,7 @@ import {
   MOCK_PROCESSING_STEPS,
   STEP_DELAYS,
   MOCK_EXTRACTED_FIELDS,
+  EXECUTION_HISTORY,
 } from "@/data/mock-memo";
 
 interface StepState {
@@ -39,10 +42,10 @@ const EXTRACTED_DISPLAY = [
   { key: "location", label: "Location", icon: MapPin },
   { key: "assetType", label: "Type", icon: ScanSearch },
   { key: "askingPrice", label: "Asking Price", icon: DollarSign },
-  { key: "gla", label: "GLA", icon: Ruler },
-  { key: "occupancy", label: "Occupancy", icon: Users },
-  { key: "capRate", label: "Cap Rate", icon: TrendingUp },
-  { key: "wault", label: "WAULT", icon: Calendar },
+  { key: "rooms", label: "Rooms / Keys", icon: Users },
+  { key: "occupancy", label: "Occupancy", icon: TrendingUp },
+  { key: "revparGrowth", label: "RevPAR Growth", icon: BarChart3 },
+  { key: "meetingSpace", label: "Meeting Space", icon: Ruler },
 ] as const;
 
 export default function AnalyzerPage() {
@@ -54,6 +57,7 @@ export default function AnalyzerPage() {
   const [showResults, setShowResults] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const [isExample, setIsExample] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const [steps, setSteps] = useState<StepState[]>(
     MOCK_PROCESSING_STEPS.map((s) => ({ ...s, status: "pending" as const }))
   );
@@ -99,7 +103,6 @@ export default function AnalyzerPage() {
       setElapsed((prev) => prev + 1);
     }, 1000);
 
-    // Animate through steps
     let cumulativeDelay = 0;
     STEP_DELAYS.forEach((delay, i) => {
       setTimeout(() => {
@@ -118,7 +121,6 @@ export default function AnalyzerPage() {
             idx === i ? { ...s, status: "done" } : s
           )
         );
-        // Show extracted fields after "extract" step completes
         if (MOCK_PROCESSING_STEPS[i].id === "extract") {
           setShowExtracted(true);
           setTimeout(() => {
@@ -128,7 +130,6 @@ export default function AnalyzerPage() {
       }, cumulativeDelay);
     });
 
-    // Show results after all steps complete
     setTimeout(() => {
       if (timerRef.current) clearInterval(timerRef.current);
       setProcessing(false);
@@ -209,9 +210,78 @@ export default function AnalyzerPage() {
               Deal Analyzer
             </h1>
             <p className="text-sm text-[var(--color-text-muted)]">
-              Upload a CIM — the AI extracts everything and generates an IC-grade memo with full underwriting analysis
+              Upload a CIM — AI agents extract deal parameters, run parallel analysis, and generate a full deal summary
             </p>
           </motion.header>
+
+          {/* ─── EXECUTION HISTORY ─── */}
+          <div className="mb-4">
+            <button
+              onClick={() => setHistoryOpen((prev) => !prev)}
+              className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition-all ${
+                historyOpen
+                  ? "border-[var(--color-accent)]/30 bg-[var(--color-accent)]/[0.03]"
+                  : "border-[var(--color-card-border)] bg-[var(--color-card)] hover:border-[var(--color-accent)]/20"
+              }`}
+            >
+              <div className="flex items-center gap-2 text-sm">
+                <Clock className="h-4 w-4 text-[var(--color-accent)]" />
+                <span className="font-medium text-[var(--color-ink)]">Recent Analyses</span>
+                <span className="rounded-full bg-[var(--color-accent)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--color-accent)]">
+                  {EXECUTION_HISTORY.length}
+                </span>
+              </div>
+              <span className="text-xs text-[var(--color-text-muted)]">
+                {historyOpen ? "Hide" : "Show"} history
+              </span>
+            </button>
+            {historyOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                transition={{ duration: 0.25 }}
+                className="mt-1 overflow-hidden rounded-xl border border-[var(--color-card-border)] bg-[var(--color-card)]"
+              >
+                <div className="divide-y divide-[var(--color-card-border)]">
+                  {EXECUTION_HISTORY.map((exec) => (
+                    <div
+                      key={exec.id}
+                      className={`flex items-center gap-3 px-4 py-3 transition-colors ${
+                        exec.id === 67
+                          ? "bg-[var(--color-accent)]/[0.04]"
+                          : "hover:bg-[var(--color-bg-muted)]"
+                      }`}
+                    >
+                      <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--color-bg-muted)] text-[10px] font-bold text-[var(--color-text-muted)]">
+                        #{exec.id}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-[var(--color-ink)] truncate">
+                            {exec.name}
+                          </span>
+                          <span className="flex-shrink-0 rounded-full bg-[var(--color-bg-muted)] px-2 py-0.5 text-[10px] font-medium text-[var(--color-text-muted)]">
+                            {exec.type}
+                          </span>
+                          {exec.id === 67 && (
+                            <span className="flex-shrink-0 rounded-full bg-[var(--color-accent)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--color-accent)]">
+                              Current
+                            </span>
+                          )}
+                        </div>
+                        <div className="mt-0.5 text-[11px] text-[var(--color-text-muted)]">
+                          {exec.date} · {exec.agents} agents · {exec.status}
+                        </div>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <Check className="h-4 w-4 text-[var(--color-success)]" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </div>
 
           {/* ─── UPLOAD FORM ─── */}
           <div className={`glass-card p-8 ${submitted ? "opacity-50 pointer-events-none" : ""} transition-opacity`}>
@@ -244,10 +314,10 @@ export default function AnalyzerPage() {
                       <Building2 className="h-6 w-6 text-[var(--color-accent)]" />
                     </div>
                     <p className="text-sm font-medium text-[var(--color-ink)]">
-                      Example: Meridian Tower — Investment Memorandum
+                      Example: Crowne Plaza SFO Airport — Offering Memorandum
                     </p>
                     <p className="mt-1 text-xs text-[var(--color-text-muted)]">
-                      10 pages — Class A Office, Midtown Manhattan
+                      32 pages — Full-Service Hotel, Burlingame CA (CBRE Hotels)
                     </p>
                   </>
                 ) : file ? (
@@ -272,7 +342,7 @@ export default function AnalyzerPage() {
                       PDF, PNG, JPG — up to 20 MB
                     </p>
                     <p className="mt-3 text-[11px] text-[var(--color-text-muted)]/70">
-                      The AI will automatically extract asset name, location, pricing, tenant info, and all deal parameters
+                      The AI will automatically extract deal parameters, run market/asset/investment analysis, and generate a full deal summary
                     </p>
                   </>
                 )}
@@ -285,7 +355,7 @@ export default function AnalyzerPage() {
                 </label>
                 <textarea
                   rows={2}
-                  placeholder="Broker notes, IC focus areas, specific concerns to address..."
+                  placeholder="IC focus areas, specific concerns, target return hurdles, asset-type preferences..."
                   value={context}
                   onChange={(e) => setContext(e.target.value)}
                   className="w-full resize-none rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40"
@@ -320,7 +390,7 @@ export default function AnalyzerPage() {
                   Try with Example Deal
                 </button>
                 <p className="mt-2.5 text-center text-[11px] text-[var(--color-text-muted)]/60">
-                  See how it works with a sample commercial property — no upload needed
+                  See how it works with a real hotel CIM (Crowne Plaza SFO) — no upload needed
                 </p>
               </>
             )}
@@ -373,7 +443,7 @@ export default function AnalyzerPage() {
                   ))}
                 </ul>
 
-                {/* Extracted Deal Info — appears after OCR extraction */}
+                {/* Extracted Deal Info */}
                 {showExtracted && (
                   <motion.div
                     ref={extractedRef}
@@ -410,7 +480,7 @@ export default function AnalyzerPage() {
 
                 {!showResults && processing && (
                   <div className="mt-3 text-center text-xs text-[var(--color-text-muted)]">
-                    Generating your investment memo...
+                    Generating your deal summary...
                   </div>
                 )}
                 {showResults && (
@@ -437,12 +507,12 @@ export default function AnalyzerPage() {
                 <div className="mb-6 flex flex-wrap items-start justify-between gap-4 border-b border-[var(--color-card-border)] pb-5">
                   <div>
                     <h2 className="text-lg font-semibold text-[var(--color-ink)]">
-                      Investment Memo
+                      Deal Summary
                     </h2>
                     <p className="mt-1 text-[11px] text-[var(--color-text-muted)]">
                       {MOCK_EXTRACTED_FIELDS.assetName} &mdash;{" "}
                       {MOCK_EXTRACTED_FIELDS.location} &mdash;{" "}
-                      Generated in {formatTime(elapsed)}
+                      Generated in {formatTime(elapsed)} &mdash; 3 parallel agents
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -483,12 +553,24 @@ export default function AnalyzerPage() {
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-[var(--color-text-muted)]">
                     <span className="h-2 w-2 rounded-sm bg-[var(--color-blue)]" />
-                    Web Source
+                    Web / Market Source
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-[var(--color-text-muted)]">
                     <span className="h-2 w-2 rounded-sm bg-[var(--color-pink)]" />
-                    Modeled
+                    Modeled / Estimated
                   </div>
+                  <div className="flex items-center gap-1.5 text-[11px] text-[var(--color-text-muted)]">
+                    <span className="h-2 w-2 rounded-sm bg-[#f59e0b]" />
+                    Data Gap
+                  </div>
+                </div>
+
+                {/* Customization Banner */}
+                <div className="mb-5 flex items-center gap-2.5 rounded-lg border border-[var(--color-accent)]/15 bg-[var(--color-accent)]/[0.03] px-4 py-2.5">
+                  <Settings2 className="h-4 w-4 flex-shrink-0 text-[var(--color-accent)]" />
+                  <p className="text-[11px] text-[var(--color-text-muted)]">
+                    Each section below is <strong className="text-[var(--color-accent)]">fully customizable</strong> — adjust analysis depth, focus areas, risk framework, or output format to match your investment criteria.
+                  </p>
                 </div>
 
                 {/* Sources Panel */}
@@ -506,14 +588,15 @@ export default function AnalyzerPage() {
                       </h3>
                       <ul className="space-y-2">
                         {[
-                          { type: "IM", color: "var(--color-purple)", label: "CIM Pages 3-22", detail: "Meridian Tower Investment Memorandum" },
-                          { type: "WEB", color: "var(--color-blue)", label: "CBRE Midtown Manhattan Office Q4 2025", detail: "cbre.com/research/manhattan" },
-                          { type: "WEB", color: "var(--color-blue)", label: "JLL NYC Office Market Outlook 2026", detail: "jll.com/research/nyc-office" },
-                          { type: "WEB", color: "var(--color-blue)", label: "Cushman & Wakefield Plaza District", detail: "cushmanwakefield.com/nyc" },
-                          { type: "WEB", color: "var(--color-blue)", label: "Real Capital Analytics Transactions", detail: "rcanalytics.com" },
-                          { type: "WEB", color: "var(--color-blue)", label: "NYC DOF Property Tax Records", detail: "nyc.gov/finance" },
-                          { type: "MODEL", color: "var(--color-pink)", label: "DSCR / LTV / Debt Yield Analysis", detail: "60% LTV, 5.25% fixed rate, 30-yr amortization" },
-                          { type: "MODEL", color: "var(--color-pink)", label: "DCF / IRR Projections", detail: "7-year hold, base/downside/upside scenarios" },
+                          { type: "IM", color: "var(--color-purple)", label: "CIM Pages 2-31", detail: "Crowne Plaza SFO Offering Memorandum (CBRE Hotels)" },
+                          { type: "WEB", color: "var(--color-blue)", label: "STR / CBRE Hotel Benchmarking", detail: "str.com — RevPAR, ADR, occupancy data" },
+                          { type: "WEB", color: "var(--color-blue)", label: "SF Travel Association 2023 Visitor Impact", detail: "sftravel.com — citywide ADR $243.80, occ 64.2%" },
+                          { type: "WEB", color: "var(--color-blue)", label: "Asian Hospitality — CA Hotel Pipeline", detail: "asianhospitality.com — development pipeline analysis" },
+                          { type: "WEB", color: "var(--color-blue)", label: "Walk Score — Burlingame, CA", detail: "walkscore.com — city avg score 70" },
+                          { type: "WEB", color: "var(--color-blue)", label: "Census / BLS — Demographics", detail: "Population, income, employment data" },
+                          { type: "MODEL", color: "var(--color-pink)", label: "Stabilized P&L / NOI Projections", detail: "ADR $136.75, 81% occupancy, Year 4 stabilization" },
+                          { type: "MODEL", color: "var(--color-pink)", label: "DSCR / LTV / Exit Analysis", detail: "60-65% LTC, 4.5-5.0% rate, 6.5% exit cap" },
+                          { type: "GAP", color: "#f59e0b", label: "Asking Price — NOT PROVIDED", detail: "Critical gating item for underwriting completion" },
                         ].map((source, i) => (
                           <li
                             key={i}
@@ -544,7 +627,7 @@ export default function AnalyzerPage() {
                 {/* Memo Content */}
                 <div className="memo-paper">
                   <h1>
-                    Investment Memo — {MOCK_EXTRACTED_FIELDS.assetName}
+                    Deal Summary — {MOCK_EXTRACTED_FIELDS.assetName}
                   </h1>
                   <div
                     style={{
@@ -594,7 +677,15 @@ export default function AnalyzerPage() {
 
                   {MOCK_MEMO_SECTIONS.map((section) => (
                     <div key={section.id} id={`memo-${section.id}`}>
-                      <h2>{section.title}</h2>
+                      <h2>
+                        {section.title}
+                        {section.customizable && (
+                          <span className="customize-badge">
+                            <Settings2 style={{ width: 10, height: 10 }} />
+                            Customizable
+                          </span>
+                        )}
+                      </h2>
                       <div
                         dangerouslySetInnerHTML={{ __html: section.html }}
                       />

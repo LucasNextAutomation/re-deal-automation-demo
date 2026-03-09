@@ -226,3 +226,40 @@ body {
   cursor: default;
   opacity: 0.75;
 }
+
+/* Data gap / verification flags */
+.cite-gap {
+  display: inline;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 3px;
+  background: #fef3c7;
+  color: #92400e;
+  white-space: nowrap;
+  vertical-align: super;
+}
+
+/* Customizable section badge */
+.customize-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+  border-radius: 4px;
+  vertical-align: middle;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  cursor: default;
+}
+.customize-badge:hover {
+  opacity: 1;
+}
