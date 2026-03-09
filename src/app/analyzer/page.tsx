@@ -4,23 +4,27 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Upload,
-  FileText,
   Copy,
   Download,
   BookOpen,
   Check,
   RotateCcw,
-  ChevronDown,
-  Lock,
+  ScanSearch,
+  Building2,
+  MapPin,
+  DollarSign,
+  Ruler,
+  Users,
+  TrendingUp,
+  Calendar,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ASSET_TYPES } from "@/data/types";
-import type { DealFormData, AssetType } from "@/data/types";
 import {
   MOCK_MEMO_SECTIONS,
   MOCK_PROCESSING_STEPS,
   STEP_DELAYS,
+  MOCK_EXTRACTED_FIELDS,
 } from "@/data/mock-memo";
 
 interface StepState {
@@ -29,18 +33,24 @@ interface StepState {
   status: "pending" | "active" | "done";
 }
 
+const EXTRACTED_DISPLAY = [
+  { key: "assetName", label: "Asset", icon: Building2 },
+  { key: "location", label: "Location", icon: MapPin },
+  { key: "assetType", label: "Type", icon: ScanSearch },
+  { key: "askingPrice", label: "Asking Price", icon: DollarSign },
+  { key: "gla", label: "GLA", icon: Ruler },
+  { key: "occupancy", label: "Occupancy", icon: Users },
+  { key: "capRate", label: "Cap Rate", icon: TrendingUp },
+  { key: "wault", label: "WAULT", icon: Calendar },
+] as const;
+
 export default function AnalyzerPage() {
+  const [file, setFile] = useState<File | null>(null);
+  const [context, setContext] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [processing, setProcessing] = useState(false);
+  const [showExtracted, setShowExtracted] = useState(false);
   const [showResults, setShowResults] = useState(false);
-  const [formData, setFormData] = useState<DealFormData>({
-    dealName: "",
-    location: "",
-    assetType: "Office",
-    askingPrice: "",
-    context: "",
-    file: null,
-  });
   const [dragOver, setDragOver] = useState(false);
   const [steps, setSteps] = useState<StepState[]>(
     MOCK_PROCESSING_STEPS.map((s) => ({ ...s, status: "pending" as const }))
@@ -51,23 +61,14 @@ export default function AnalyzerPage() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const processingRef = useRef<HTMLDivElement>(null);
+  const extractedRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  const updateField = useCallback(
-    <K extends keyof DealFormData>(key: K, value: DealFormData[K]) => {
-      setFormData((prev) => ({ ...prev, [key]: value }));
-    },
-    []
-  );
-
-  const handleFileChange = useCallback(
-    (files: FileList | null) => {
-      if (files && files.length > 0) {
-        updateField("file", files[0]);
-      }
-    },
-    [updateField]
-  );
+  const handleFileChange = useCallback((files: FileList | null) => {
+    if (files && files.length > 0) {
+      setFile(files[0]);
+    }
+  }, []);
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -82,17 +83,16 @@ export default function AnalyzerPage() {
     setSubmitted(true);
     setProcessing(true);
     setShowResults(false);
+    setShowExtracted(false);
     setElapsed(0);
     setSteps(
       MOCK_PROCESSING_STEPS.map((s) => ({ ...s, status: "pending" as const }))
     );
 
-    // Scroll to processing section
     setTimeout(() => {
       processingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
 
-    // Start elapsed timer
     timerRef.current = setInterval(() => {
       setElapsed((prev) => prev + 1);
     }, 1000);
@@ -116,6 +116,13 @@ export default function AnalyzerPage() {
             idx === i ? { ...s, status: "done" } : s
           )
         );
+        // Show extracted fields after "extract" step completes
+        if (MOCK_PROCESSING_STEPS[i].id === "extract") {
+          setShowExtracted(true);
+          setTimeout(() => {
+            extractedRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }, 100);
+        }
       }, cumulativeDelay);
     });
 
@@ -124,7 +131,6 @@ export default function AnalyzerPage() {
       if (timerRef.current) clearInterval(timerRef.current);
       setProcessing(false);
       setShowResults(true);
-      // Scroll to results
       setTimeout(() => {
         resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
@@ -143,14 +149,9 @@ export default function AnalyzerPage() {
     setSubmitted(false);
     setProcessing(false);
     setShowResults(false);
-    setFormData({
-      dealName: "",
-      location: "",
-      assetType: "Office",
-      askingPrice: "",
-      context: "",
-      file: null,
-    });
+    setShowExtracted(false);
+    setFile(null);
+    setContext("");
     setSteps(
       MOCK_PROCESSING_STEPS.map((s) => ({ ...s, status: "pending" as const }))
     );
@@ -158,7 +159,6 @@ export default function AnalyzerPage() {
     setSourcesOpen(false);
     setCopied(false);
     if (timerRef.current) clearInterval(timerRef.current);
-    // Scroll back to top
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
@@ -201,175 +201,88 @@ export default function AnalyzerPage() {
               Deal Analyzer
             </h1>
             <p className="text-sm text-[var(--color-text-muted)]">
-              Upload a CIM and get an IC-grade investment memo in minutes
+              Upload a CIM — the AI extracts everything and generates an IC-grade memo
             </p>
           </motion.header>
 
-          {/* ─── FORM (always visible) ─── */}
-          <div className={`glass-card p-8 ${submitted ? "opacity-60" : ""} transition-opacity`}>
-            {submitted && (
-              <div className="mb-4 flex items-center gap-2 rounded-lg border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/5 px-3 py-2 text-xs text-[var(--color-accent)]">
-                <Lock className="h-3.5 w-3.5" />
-                Analysis submitted — scroll down for results
-              </div>
-            )}
+          {/* ─── UPLOAD FORM ─── */}
+          <div className={`glass-card p-8 ${submitted ? "opacity-50 pointer-events-none" : ""} transition-opacity`}>
             <form onSubmit={handleSubmit}>
-              <fieldset disabled={submitted}>
-                <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
-                      Asset Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Carré Haussmann"
-                      value={formData.dealName}
-                      onChange={(e) =>
-                        updateField("dealName", e.target.value)
-                      }
-                      className="w-full rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40 disabled:cursor-not-allowed"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
-                      Location
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Paris 9ème"
-                      value={formData.location}
-                      onChange={(e) =>
-                        updateField("location", e.target.value)
-                      }
-                      className="w-full rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40 disabled:cursor-not-allowed"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
-                      Asset Type
-                    </label>
-                    <div className="relative">
-                      <select
-                        value={formData.assetType}
-                        onChange={(e) =>
-                          updateField(
-                            "assetType",
-                            e.target.value as AssetType
-                          )
-                        }
-                        className="w-full appearance-none rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus:border-[var(--color-accent)]/40 disabled:cursor-not-allowed"
-                      >
-                        {ASSET_TYPES.map((type) => (
-                          <option
-                            key={type}
-                            value={type}
-                            className="bg-white"
-                          >
-                            {type}
-                          </option>
-                        ))}
-                      </select>
-                      <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--color-text-muted)]" />
+              {/* Upload Zone */}
+              <div
+                onDragEnter={(e) => { e.preventDefault(); setDragOver(true); }}
+                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={handleDrop}
+                onClick={() => fileInputRef.current?.click()}
+                className={`relative mb-5 cursor-pointer rounded-xl border-[1.5px] border-dashed p-10 text-center transition-all ${
+                  dragOver
+                    ? "border-[var(--color-accent)] bg-[var(--color-accent)]/[0.03]"
+                    : file
+                      ? "border-[var(--color-accent)]/40 bg-[var(--color-accent)]/[0.02]"
+                      : "border-[var(--color-input-border)] hover:border-[var(--color-accent)]/50"
+                }`}
+              >
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".pdf,.png,.jpg,.jpeg"
+                  onChange={(e) => handleFileChange(e.target.files)}
+                  className="hidden"
+                />
+                {file ? (
+                  <>
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-accent)]/10">
+                      <ScanSearch className="h-6 w-6 text-[var(--color-accent)]" />
                     </div>
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
-                      Asking Price
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. €45M"
-                      value={formData.askingPrice}
-                      onChange={(e) =>
-                        updateField("askingPrice", e.target.value)
-                      }
-                      className="w-full rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40 disabled:cursor-not-allowed"
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-4">
-                  <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
-                    Context & Notes
-                  </label>
-                  <textarea
-                    rows={3}
-                    placeholder="Broker notes, key concerns, what the IC wants to see..."
-                    value={formData.context}
-                    onChange={(e) =>
-                      updateField("context", e.target.value)
-                    }
-                    className="w-full resize-y rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40 disabled:cursor-not-allowed"
-                  />
-                </div>
-
-                {/* Upload Zone */}
-                <div
-                  onDragEnter={(e) => {
-                    e.preventDefault();
-                    if (!submitted) setDragOver(true);
-                  }}
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    if (!submitted) setDragOver(true);
-                  }}
-                  onDragLeave={() => setDragOver(false)}
-                  onDrop={(e) => {
-                    if (!submitted) handleDrop(e);
-                    else e.preventDefault();
-                  }}
-                  onClick={() => !submitted && fileInputRef.current?.click()}
-                  className={`relative mb-6 rounded-xl border-[1.5px] border-dashed p-6 text-center transition-all ${
-                    submitted
-                      ? "cursor-not-allowed border-[var(--color-input-border)]"
-                      : dragOver
-                        ? "cursor-pointer border-[var(--color-accent)] bg-[var(--color-accent)]/[0.03]"
-                        : "cursor-pointer border-[var(--color-input-border)] hover:border-[var(--color-accent)]/50"
-                  }`}
-                >
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept=".pdf,.png,.jpg,.jpeg"
-                    onChange={(e) => handleFileChange(e.target.files)}
-                    className="hidden"
-                    disabled={submitted}
-                  />
-                  <Upload className="mx-auto mb-2 h-7 w-7 text-[var(--color-text-muted)]" />
-                  {formData.file ? (
-                    <p className="text-sm">
-                      <span className="font-medium text-[var(--color-accent)]">
-                        {formData.file.name}
-                      </span>{" "}
-                      <span className="text-[var(--color-text-muted)]">
-                        ({(formData.file.size / 1048576).toFixed(1)} MB)
-                      </span>
+                    <p className="text-sm font-medium text-[var(--color-ink)]">
+                      {file.name}
                     </p>
-                  ) : (
-                    <>
-                      <p className="mb-1 text-sm text-[var(--color-text)]">
-                        Drop your CIM here or click to browse
-                      </p>
-                      <span className="text-xs text-[var(--color-text-muted)]">
-                        PDF, PNG, JPG — up to 20 MB
-                      </span>
-                    </>
-                  )}
-                </div>
+                    <p className="mt-1 text-xs text-[var(--color-text-muted)]">
+                      {(file.size / 1048576).toFixed(1)} MB — Ready to analyze
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <Upload className="mx-auto mb-3 h-10 w-10 text-[var(--color-text-muted)]" />
+                    <p className="mb-1 text-sm font-medium text-[var(--color-ink)]">
+                      Drop your CIM here or click to browse
+                    </p>
+                    <p className="text-xs text-[var(--color-text-muted)]">
+                      PDF, PNG, JPG — up to 20 MB
+                    </p>
+                    <p className="mt-3 text-[11px] text-[var(--color-text-muted)]/70">
+                      The AI will automatically extract asset name, location, pricing, tenant info, and all deal parameters
+                    </p>
+                  </>
+                )}
+              </div>
 
-                <button
-                  type="submit"
-                  disabled={submitted}
-                  className="w-full rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-dark)] py-3.5 text-[15px] font-semibold tracking-wide text-white shadow-lg shadow-[var(--color-accent)]/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[var(--color-accent)]/30 disabled:translate-y-0 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed"
-                >
-                  {submitted ? "Analysis Running..." : "Analyze Deal"}
-                </button>
-              </fieldset>
+              {/* Optional context */}
+              <div className="mb-5">
+                <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
+                  Additional Context <span className="normal-case tracking-normal font-normal">(optional)</span>
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="Broker notes, IC focus areas, specific concerns to address..."
+                  value={context}
+                  onChange={(e) => setContext(e.target.value)}
+                  className="w-full resize-none rounded-lg border border-[var(--color-input-border)] bg-[var(--color-input)] px-3.5 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/50 focus:border-[var(--color-accent)]/40"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={!file}
+                className="w-full rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-dark)] py-3.5 text-[15px] font-semibold tracking-wide text-white shadow-lg shadow-[var(--color-accent)]/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[var(--color-accent)]/30 disabled:translate-y-0 disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
+              >
+                Analyze CIM
+              </button>
             </form>
           </div>
 
-          {/* ─── PROCESSING (appears below form) ─── */}
+          {/* ─── PROCESSING PIPELINE ─── */}
           {submitted && (
             <motion.div
               ref={processingRef}
@@ -415,6 +328,42 @@ export default function AnalyzerPage() {
                     </li>
                   ))}
                 </ul>
+
+                {/* Extracted Deal Info — appears after OCR extraction */}
+                {showExtracted && (
+                  <motion.div
+                    ref={extractedRef}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    transition={{ duration: 0.4 }}
+                    className="mt-4 overflow-hidden border-t border-[var(--color-card-border)] pt-4"
+                  >
+                    <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-[var(--color-accent)]">
+                      <ScanSearch className="h-3.5 w-3.5" />
+                      Extracted from CIM ({MOCK_EXTRACTED_FIELDS.pages} pages)
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                      {EXTRACTED_DISPLAY.map(({ key, label, icon: Icon }) => (
+                        <motion.div
+                          key={key}
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: EXTRACTED_DISPLAY.findIndex(d => d.key === key) * 0.06 }}
+                          className="rounded-lg border border-[var(--color-card-border)] bg-[var(--color-bg-muted)] p-2.5"
+                        >
+                          <div className="mb-1 flex items-center gap-1 text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">
+                            <Icon className="h-3 w-3" />
+                            {label}
+                          </div>
+                          <div className="text-xs font-semibold text-[var(--color-ink)] leading-tight">
+                            {MOCK_EXTRACTED_FIELDS[key as keyof typeof MOCK_EXTRACTED_FIELDS]}
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
                 {!showResults && processing && (
                   <div className="mt-3 text-center text-xs text-[var(--color-text-muted)]">
                     Generating your investment memo...
@@ -430,7 +379,7 @@ export default function AnalyzerPage() {
             </motion.div>
           )}
 
-          {/* ─── RESULTS (appears below processing) ─── */}
+          {/* ─── RESULTS ─── */}
           {showResults && (
             <motion.div
               ref={resultsRef}
@@ -447,8 +396,8 @@ export default function AnalyzerPage() {
                       Investment Memo
                     </h2>
                     <p className="mt-1 text-[11px] text-[var(--color-text-muted)]">
-                      {formData.dealName || "Carré Haussmann"} &mdash;{" "}
-                      {formData.location || "Paris 9ème"} &mdash;{" "}
+                      {MOCK_EXTRACTED_FIELDS.assetName} &mdash;{" "}
+                      {MOCK_EXTRACTED_FIELDS.location} &mdash;{" "}
                       Generated in {formatTime(elapsed)}
                     </p>
                   </div>
@@ -513,55 +462,14 @@ export default function AnalyzerPage() {
                       </h3>
                       <ul className="space-y-2">
                         {[
-                          {
-                            type: "IM",
-                            color: "var(--color-purple)",
-                            label: "CIM Pages 3-22",
-                            detail: "Carré Haussmann Investment Memorandum",
-                          },
-                          {
-                            type: "WEB",
-                            color: "var(--color-blue)",
-                            label: "JLL Paris Office Market Q4 2025",
-                            detail: "jll.fr/research/paris-office",
-                          },
-                          {
-                            type: "WEB",
-                            color: "var(--color-blue)",
-                            label: "BNP Paribas RE Market Data Q4 2025",
-                            detail: "realestate.bnpparibas.fr",
-                          },
-                          {
-                            type: "WEB",
-                            color: "var(--color-blue)",
-                            label: "Cushman & Wakefield Paris Transactions",
-                            detail: "cushmanwakefield.com/paris",
-                          },
-                          {
-                            type: "WEB",
-                            color: "var(--color-blue)",
-                            label: "ADEME DPE Regulations 2025",
-                            detail: "ademe.fr/reglementation",
-                          },
-                          {
-                            type: "WEB",
-                            color: "var(--color-blue)",
-                            label: "CBRE France Investment Outlook 2025",
-                            detail: "cbre.fr/research",
-                          },
-                          {
-                            type: "WEB",
-                            color: "var(--color-blue)",
-                            label: "Knight Frank Paris Outlook 2026",
-                            detail: "knightfrank.fr/research",
-                          },
-                          {
-                            type: "MODEL",
-                            color: "var(--color-pink)",
-                            label: "DCF / IRR Projections",
-                            detail:
-                              "7-year hold, 55% LTV, 3.2% fixed rate",
-                          },
+                          { type: "IM", color: "var(--color-purple)", label: "CIM Pages 3-22", detail: "Meridian Tower Investment Memorandum" },
+                          { type: "WEB", color: "var(--color-blue)", label: "CBRE Midtown Manhattan Office Q4 2025", detail: "cbre.com/research/manhattan" },
+                          { type: "WEB", color: "var(--color-blue)", label: "JLL NYC Office Market Outlook 2026", detail: "jll.com/research/nyc-office" },
+                          { type: "WEB", color: "var(--color-blue)", label: "Cushman & Wakefield Plaza District", detail: "cushmanwakefield.com/nyc" },
+                          { type: "WEB", color: "var(--color-blue)", label: "CoStar NYC Office Analytics", detail: "costar.com/analytics" },
+                          { type: "WEB", color: "var(--color-blue)", label: "NYC DOF Property Tax Records", detail: "nyc.gov/finance" },
+                          { type: "WEB", color: "var(--color-blue)", label: "Real Capital Analytics Transactions", detail: "rcanalytics.com" },
+                          { type: "MODEL", color: "var(--color-pink)", label: "DCF / IRR Projections", detail: "7-year hold, 60% LTV, 5.25% fixed rate" },
                         ].map((source, i) => (
                           <li
                             key={i}
@@ -579,7 +487,7 @@ export default function AnalyzerPage() {
                             <span className="text-[var(--color-text)]">
                               {source.label}
                             </span>
-                            <span className="ml-auto text-xs text-[var(--color-text-muted)]">
+                            <span className="ml-auto hidden text-xs text-[var(--color-text-muted)] sm:block">
                               {source.detail}
                             </span>
                           </li>
@@ -592,7 +500,7 @@ export default function AnalyzerPage() {
                 {/* Memo Content */}
                 <div className="memo-paper">
                   <h1>
-                    Investment Memo — {formData.dealName || "Carré Haussmann"}
+                    Investment Memo — {MOCK_EXTRACTED_FIELDS.assetName}
                   </h1>
                   <div
                     style={{

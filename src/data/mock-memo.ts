@@ -119,10 +119,24 @@ export const MOCK_MEMO_SECTIONS = [
 
 export const MOCK_PROCESSING_STEPS = [
   { id: "upload", label: "Uploading document" },
-  { id: "ocr", label: "Extracting text (Gemini OCR)" },
-  { id: "segment", label: "Segmenting into categories" },
-  { id: "agents", label: "Running analysis agents" },
+  { id: "ocr", label: "Extracting text & tables (Gemini OCR)" },
+  { id: "extract", label: "Identifying deal parameters" },
+  { id: "segment", label: "Segmenting into analysis categories" },
+  { id: "agents", label: "Running parallel analysis agents" },
   { id: "memo", label: "Generating IC memo" },
 ];
 
-export const STEP_DELAYS = [800, 1600, 1800, 2200, 1600];
+export const STEP_DELAYS = [800, 1400, 1200, 1600, 2200, 1600];
+
+export const MOCK_EXTRACTED_FIELDS = {
+  assetName: "Meridian Tower",
+  location: "350 Park Avenue, Midtown Manhattan, NY",
+  assetType: "Class A Office + Retail",
+  askingPrice: "$142,000,000",
+  gla: "186,400 SF",
+  occupancy: "91.3%",
+  capRate: "4.85%",
+  wault: "6.4 years",
+  yearBuilt: "1963 / Renovated 2023",
+  pages: 10,
+};
