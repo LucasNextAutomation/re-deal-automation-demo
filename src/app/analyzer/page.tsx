@@ -155,6 +155,22 @@ export default function AnalyzerPage() {
     startProcessing();
   }, [startProcessing]);
 
+  const viewPastResult = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    setIsExample(true);
+    setSubmitted(true);
+    setProcessing(false);
+    setShowExtracted(true);
+    setShowResults(true);
+    setElapsed(47);
+    setSteps(
+      MOCK_PROCESSING_STEPS.map((s) => ({ ...s, status: "done" as const }))
+    );
+    setTimeout(() => {
+      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+  }, []);
+
   const resetAnalyzer = useCallback(() => {
     setSubmitted(false);
     setProcessing(false);
@@ -250,9 +266,9 @@ export default function AnalyzerPage() {
                       key={exec.id}
                       type="button"
                       onClick={() => {
-                        if (exec.id === 67 && !submitted) {
+                        if (exec.id === 67) {
                           setHistoryOpen(false);
-                          handleTryExample();
+                          viewPastResult();
                         }
                       }}
                       className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors ${
